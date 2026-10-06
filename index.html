@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<!-- A declaração <!DOCTYPE html> avisa ao navegador que este arquivo é um documento HTML5 (a versão mais moderna). -->
+<html lang="pt-BR">
+<!-- A tag <html> é a "raiz" de todo o site. O atributo lang="pt-BR" informa que o conteúdo está em português do Brasil (isso ajuda leitores de tela e o Google). -->
+
+<head>
+    <!-- A tag <head> guarda as CONFIGURAÇÕES da página. Nada aqui aparece visualmente para o cliente. -->
+
+    <meta charset="UTF-8">
+    <!-- charset="UTF-8" permite usar acentos (á, ç, ã) corretamente, sem aparecer "símbolos estranhos". -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Esta linha é ESSENCIAL para o site funcionar bem no celular: ela faz a página se adaptar à largura da tela do aparelho. -->
+
+    <title>Farmácia Vida & Saúde | Sua saúde em primeiro lugar</title>
+    <!-- O <title> é o texto que aparece na aba do navegador e no resultado do Google. -->
+
+    <meta name="description" content="Farmácia Vida & Saúde: medicamentos, higiene, beleza e ofertas com atendimento rápido e humanizado.">
+    <!-- A "description" é o resuminho que aparece no Google. Ajuda novos clientes a encontrarem a farmácia. -->
+
+    <style>
+        /* =====================================================================
+           AQUI COMEÇA O CSS (a "decoração" do site).
+           Tudo o que está dentro da tag <style> serve para deixar o site bonito.
+           ===================================================================== */
+
+        /* ---------------------------------------------------------------------
+           1) VARIÁVEIS DE COR
+           Criamos "apelidos" para as cores. Assim, se um dia a farmácia quiser
+           trocar o azul, basta mudar AQUI (em um lugar só) e o site inteiro muda.
+           --------------------------------------------------------------------- */
+        :root {
+            --azul-escuro: #0d4f6c;   /* Azul escuro: usado no cabeçalho e no rodapé */
+            --azul: #1e88a8;          /* Azul médio: usado em botões e detalhes */
+            --azul-claro: #e8f4f8;    /* Azul bem clarinho: usado em fundos suaves */
+            --verde: #2fb380;         /* Verde: cor de "saúde", usada em destaques e preços */
+            --verde-escuro: #23906a;  /* Verde mais escuro: usado quando o mouse passa por cima do botão */
+            --branco: #ffffff;        /* Branco puro */
+            --cinza-texto: #4a5568;   /* Cinza para textos: mais confortável de ler que o preto puro */
+            --cinza-claro: #f4f8fb;   /* Cinza azulado bem claro: fundo de algumas seções */
+            --sombra: 0 4px 14px rgba(13, 79, 108, 0.10); /* Sombra suave usada nos cards */
+            --arredondado: 14px;      /* Medida padrão de arredondamento dos cantos */
+        }
+
+        /* ---------------------------------------------------------------------
+           2) RESET BÁSICO
+           Os navegadores (Chrome, Edge, etc.) colocam espaçamentos diferentes por padrão.
+           Estas regras "zeram" tudo para começarmos do mesmo ponto em todos eles.
+           --------------------------------------------------------------------- */
+        * {
+            margin: 0;              /* margin = espaço POR FORA do elemento. Zero em todos. */
+            padding: 0;             /* padding = espaço POR DENTRO do elemento. Zero em todos. */
+            box-sizing: border-box; /* Faz padding e borda serem contados DENTRO da largura. Evita que elementos "estourem" a tela. */
+        }
+
+        /* Rolagem suave: quando o cliente clicar em um link do menu, a página desliza em vez de pular. */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Estilo geral do texto do site */
+        body {
+            font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; /* Fonte limpa e fácil de ler */
+            color: var(--cinza-texto);  /* Cor padrão de todos os textos */
+            background-color: var(--branco); /* Cor de fundo geral da página */
+            line-height: 1.6;           /* Espaço entre as linhas do texto. Deixa a leitura mais leve. */
+        }
+
+        /* Remove o "sublinhado" dos links e usa a cor que definirmos */
+        a {
+            text-decoration: none;
+            color: inherit; /* "inherit" = herda a cor do elemento pai (o de cima) */
+        }
+
+        /* Todo elemento com a classe .container fica centralizado e com largura máxima.
+           Isso evita que o conteúdo fique esticado demais em telas grandes. */
+        .container {
+            width: 100%;
+            max-width: 1180px;  /* Largura máxima do conteúdo */
+            margin: 0 auto;     /* "0 auto" = zero em cima/baixo e AUTOMÁTICO nas laterais => centraliza */
+            padding: 0 20px;    /* Respiro nas laterais para o texto não encostar na borda no celular */
+        }
+
+        /* =====================================================================
+           3) CABEÇALHO (HEADER)
+           ===================================================================== */
+        header {
+            background-color: var(--azul-escuro); /* Cor de fundo do cabeçalho */
+            color: var(--branco);                 /* Cor do texto dentro do cabeçalho */
+            position: sticky;                     /* "sticky" faz o cabeçalho GRUDAR no topo quando rolamos a página */
+            top: 0;                               /* Diz que ele deve grudar no topo (0 = topo) */
+            z-index: 1000;                        /* z-index controla quem fica "na frente". 1000 garante que o cabeçalho fique acima do resto. */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Sombra embaixo do cabeçalho */
+        }
+
+        /* Faixa de cima do cabeçalho: logo + busca + carrinho */
+        .topo {
+            display: flex;             /* display:flex organiza os itens UM AO LADO DO OUTRO (em linha) */
+            align-items: center;       /* Alinha os itens pelo CENTRO na vertical */
+            justify-content: space-between; /* Espalha os itens: primeiro na esquerda, último na direita */
+            gap: 20px;                 /* Espaço mínimo entre os itens */
+            padding: 14px 0;           /* Espaço interno em cima e embaixo */
+            flex-wrap: wrap;           /* Se não couber na largura, os itens "pulam" para a linha de baixo (importante no celular) */
+        }
+
+        /* Área do logotipo (ícone + nome) */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;   /* 1.35rem = 1.35 vezes o tamanho padrão de fonte */
+            font-weight: 700;     /* Negrito */
+            letter-spacing: 0.3px;
+        }
+
+        /* O quadradinho com a cruz (símbolo da farmácia) */
+        .logo-icone {
+            width: 42px;
+            height: 42px;
+            background-color: var(--verde); /* Fundo verde */
+            border-radius: 12px;            /* Cantos arredondados */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--branco);
+            flex-shrink: 0; /* Impede que o ícone seja "esmagado" em telas pequenas */
+        }
+
+        /* A parte "Vida & Saúde" ganha uma cor diferente do "Farmácia" */
+        .logo span.destaque {
+            color: #7fe3bd; /* Verde clarinho, para dar contraste no fundo azul escuro */
+        }
+
+        /* Caixa de busca (campo de digitação) */
+        .busca {
+            display: flex;
+            align-items: center;
+            background-color: var(--branco);
+            border-radius: 30px;  /* Cantos bem arredondados => parece uma "pílula" */
+            padding: 6px 6px 6px 18px;
+            flex: 1;              /* "flex:1" faz esta caixa ocupar todo o espaço que sobrar */
+            min-width: 220px;     /* Largura mínima para não ficar apertada demais */
+            max-width: 460px;     /* Largura máxima para não ficar gigante em telas grandes */
+        }
+
+        /* O campo onde o cliente digita o remédio */
+        .busca input {
+            border: none;        /* Remove a bordinha padrão do navegador */
+            outline: none;       /* Remove o contorno azul quando clicamos */
+            flex: 1;             /* Ocupa todo o espaço disponível dentro da caixa de busca */
+            font-size: 0.95rem;
+            color: var(--cinza-texto);
+            background: transparent; /* Fundo transparente (mostra o branco da caixa) */
+            padding: 8px 0;
+        }
+
+        /* O botão "Buscar" dentro da caixa */
+        .busca button {
+            background-color: var(--azul);  /* Fundo azul */
+            color: var(--branco);           /* Texto branco */
+            border: none;                   /* Sem borda */
+            border-radius: 24px;            /* Arredondado */
+            padding: 9px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;                /* Muda o cursor para a "mãozinha" ao passar o mouse */
+            transition: background-color 0.25s; /* Suaviza a troca de cor */
+        }
+
+        /* Quando o mouse passa por cima do botão de busca */
+        .busca button:hover {
+            background-color: var(--verde); /* A cor muda para verde */
+        }
+
+        /* Botão do carrinho de compras */
+        .carrinho {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.12); /* Branco "transparente" para destacar no fundo azul */
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 30px;
+            padding: 9px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--branco);
+            transition: background-color 0.25s;
+            position: relative; /* Necessário para posicionar a "bolinha" com o número de itens */
+        }
+
+        .carrinho:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* A bolinha vermelha com a quantidade de produtos no carrinho */
+        .carrinho .contador {
+            background-color: #e74c3c; /* Vermelho */
+            color: var(--branco);
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;       /* 50% de arredondamento = círculo perfeito */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ---------------------------------------------------------------------
+           MENU DE NAVEGAÇÃO
+           --------------------------------------------------------------------- */
+        nav {
+            background-color: rgba(0, 0, 0, 0.15); /* Faixa um pouco mais escura que o cabeçalho */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* A lista de links do menu */
+        .menu {
+            display: flex;       /* Coloca os itens do menu um ao lado do outro */
+            list-style: none;    /* Remove as "bolinhas" da lista */
+            gap: 6px;            /* Espaço entre cada link */
+            flex-wrap: wrap;     /* Permite quebrar linha no celular */
+            justify-content: center; /* Centraliza os links */
+        }
+
+        /* Cada link do menu */
+        .menu a {
+            display: block;             /* Faz o link ocupar toda a área clicável */
+            padding: 13px 18px;         /* Área de clique confortável (bom para o dedo no celular) */
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: 3px solid transparent; /* Linha invisível embaixo (vai aparecer no hover) */
+            transition: all 0.25s;
+        }
+
+        /* Quando o mouse passa por cima do link do menu */
+        .menu a:hover {
+            color: var(--branco);
+            background-color: rgba(255, 255, 255, 0.08);
+            border-bottom-color: var(--verde); /* A linha de baixo fica verde */
+        }
+
+        /* =====================================================================
+           4) BANNER PRINCIPAL (HERO)
+           ===================================================================== */
+        .banner {
+            /* A imagem de fundo é aplicada via CSS. "cover" faz ela cobrir todo o espaço sem distorcer. */
+            background-image: linear-gradient(rgba(13, 79, 108, 0.78), rgba(13, 79, 108, 0.78)),
+                              url("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;        /* A imagem cobre todo o banner */
+            background-position: center;   /* Centraliza a imagem */
+            color: var(--branco);
+            text-align: center;            /* Centraliza o texto */
+            padding: 90px 20px;            /* Bastante espaço interno para o banner ficar "grande" */
+        }
+
+        /* O título grande do banner */
+        .banner h1 {
+            font-size: 2.6rem;      /* Tamanho grande de fonte */
+            line-height: 1.2;
+            margin-bottom: 18px;    /* Espaço abaixo do título */
+            max-width: 780px;
+            margin-left: auto;      /* "auto" nas laterais + max-width = texto centralizado */
+            margin-right: auto;
+        }
+
+        /* O texto de apoio do banner */
+        .banner p {
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto 32px auto; /* Centraliza e dá espaço embaixo */
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        /* Botão principal de chamada para ação (CTA) */
+        .botao {
+            display: inline-block;   /* Fica do tamanho do texto, mas aceita espaçamentos */
+            background-color: var(--verde);
+            color: var(--branco);
+            padding: 15px 38px;
+            border-radius: 40px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.25s; /* Suaviza o crescimento e a cor */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+        }
+
+        /* Efeito ao passar o mouse: o botão fica um pouco maior e mais escuro */
+        .botao:hover {
+            background-color: var(--verde-escuro);
+            transform: translateY(-3px); /* Sobe 3 pixels, dando sensação de "clique" */
+        }
+
+        /* =====================================================================
+           5) TÍTULOS DAS SEÇÕES
+           ===================================================================== */
+        section {
+            padding: 70px 0; /* Espaço em cima e embaixo de cada seção do site */
+        }
+
+        .titulo-secao {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .titulo-secao h2 {
+            font-size: 2rem;
+            color: var(--azul-escuro);
+            margin-bottom: 10px;
+        }
+
+        /* A linha verde decorativa embaixo do título */
+        .titulo-secao h2::after {
+            content: "";               /* "content" é obrigatório para criar elementos decorativos */
+            display: block;
+            width: 70px;
+            height: 4px;
+            background-color: var(--verde);
+            border-radius: 4px;
+            margin: 14px auto 0 auto;  /* Centraliza a linha */
+        }
+
+        .titulo-secao p {
+            color: #6b7a8f;
+            font-size: 1rem;
+        }
+
+        /* =====================================================================
+           6) GRADE DE PRODUTOS
+           ===================================================================== */
+        .grade-produtos {
+            display: grid; /* "grid" cria uma grade (tipo uma tabela invisível) */
+            /* A função repeat(auto-fit, minmax(240px, 1fr)) significa:
+               "crie quantas colunas couberem, cada uma com no mínimo 240px e no máximo 1 fração do espaço".
+               Resultado: 4 colunas no computador, 1 coluna no celular — tudo automático! */
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 26px; /* Espaço entre os cards */
+        }
+
+        /* Cada card de produto */
+        .card {
+            background-color: var(--branco);
+            border: 1px solid #e6eef4;
+            border-radius: var(--arredondado);
+            overflow: hidden;  /* Faz a imagem respeitar os cantos arredondados do card */
+            box-shadow: var(--sombra);
+            display: flex;
+            flex-direction: column; /* Coloca imagem, texto e botão UM EMBAIXO DO OUTRO */
+            transition: transform 0.25s, box-shadow 0.25s;
+            position: relative; /* Para posicionar o selo de desconto */
+        }
+
+        /* Ao passar o mouse, o card "levanta" um pouco */
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 28px rgba(13, 79, 108, 0.18);
+        }
+
+        /* A imagem do produto */
+        .card img {
+            width: 100%;       /* Ocupa toda a largura do card */
+            height: 190px;     /* Altura fixa para todos ficarem alinhados */
+            object-fit: cover; /* Recorta a imagem para preencher o espaço sem esticar */
+            background-color: var(--azul-claro);
+        }
+
+        /* Selo de desconto no canto da imagem */
+        .selo {
+            position: absolute; /* "absolute" posiciona o selo em cima da imagem, livremente */
+            top: 12px;
+            left: 12px;
+            background-color: #e74c3c;
+            color: var(--branco);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Área de texto do card (título, descrição, preço e botão) */
+        .card-conteudo {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;  /* Faz todos os cards terem a mesma altura, empurrando o botão para baixo */
+        }
+
+        /* Categoria pequenininha acima do nome do produto */
+        .card-categoria {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase; /* Deixa o texto em MAIÚSCULAS */
+            letter-spacing: 0.8px;
+            color: var(--azul);
+            margin-bottom: 6px;
+        }
+
+        .card h3 {
+            font-size: 1.05rem;
+            color: var(--azul-escuro);
+            margin-bottom: 6px;
+        }
+
+        .card .descricao {
+            font-size: 0.85rem;
+            color: #7b8794;
+            margin-bottom: 16px;
+            flex: 1; /* Ocupa o espaço que sobra, alinhando os preços */
+        }
+
+        /* Linha do preço */
+        .preco {
+            display: flex;
+            align-items: baseline; /* Alinha os textos pela base (parte de baixo das letras) */
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        /* Preço antigo, riscado */
+        .preco-antigo {
+            font-size: 0.85rem;
+            color: #a0aec0;
+            text-decoration: line-through; /* Cria o risco no meio do texto */
+        }
+
+        /* Preço atual, em destaque */
+        .preco-atual {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--verde);
+        }
+
+        /* Botão "Comprar" dentro do card */
+        .botao-comprar {
+            width: 100%;
+            background-color: var(--azul);
+            color: var(--branco);
+            border: none;
+            border-radius: 10px;
+            padding: 13px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.25s;
+        }
+
+        .botao-comprar:hover {
+            background-color: var(--verde);
+        }
+
+        /* =====================================================================
+           7) SEÇÃO "SOBRE NÓS"
+           ===================================================================== */
+        .sobre {
+            background-color: var(--cinza-claro); /* Fundo cinza-claro para diferenciar a seção */
+        }
+
+        /* Aqui usamos flex para colocar a imagem ao lado do texto */
+        .sobre-conteudo {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap; /* No celular, um item vai para baixo do outro */
+        }
+
+        /* A imagem ocupa 45% da largura; o texto, o restante */
+        .sobre-imagem {
+            flex: 1 1 320px;
+        }
+
+        .sobre-imagem img {
+            width: 100%;
+            border-radius: var(--arredondado);
+            box-shadow: var(--sombra);
+            display: block; /* Remove um pequeno espaço vazio que aparece embaixo das imagens */
+        }
+
+        .sobre-texto {
+            flex: 1 1 360px;
+        }
+
+        .sobre-texto h2 {
+            font-size: 1.9rem;
+            color: var(--azul-escuro);
+            margin-bottom: 18px;
+        }
+
+        .sobre-texto p {
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        /* Lista de vantagens com "✔" */
+        .lista-vantagens {
+            list-style: none; /* Remove as bolinhas padrão da lista */
+            margin-top: 22px;
+        }
+
+        .lista-vantagens li {
+            padding: 9px 0 9px 32px; /* Espaço à esquerda para caber o ícone */
+            position: relative;      /* Permite posicionar o "✔" de forma absoluta */
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--azul-escuro);
+        }
+
+        /* O "✔" verde criado pelo CSS */
+        .lista-vantagens li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%); /* Centraliza o ícone na vertical */
+            width: 22px;
+            height: 22px;
+            background-color: var(--verde);
+            color: var(--branco);
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =====================================================================
+           8) RODAPÉ (FOOTER)
+           ===================================================================== */
+        footer {
+            background-color: var(--azul-escuro);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 60px 0 0 0;
+        }
+
+        /* Grade com as 3 colunas de informações do rodapé */
+        .rodape-grade {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Vira 1 coluna no celular automaticamente */
+            gap: 36px;
+            padding-bottom: 45px;
+        }
+
+        .rodape-coluna h4 {
+            color: var(--branco);
+            font-size: 1.05rem;
+            margin-bottom: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        /* Linha verde decorativa embaixo do título da coluna */
+        .rodape-coluna h4::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 36px;
+            height: 3px;
+            background-color: var(--verde);
+            border-radius: 3px;
+        }
+
+        .rodape-coluna p,
+        .rodape-coluna li {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .rodape-coluna ul {
+            list-style: none;
+        }
+
+        /* Links do rodapé (inclusive redes sociais) */
+        .rodape-coluna a {
+            transition: color 0.2s, padding-left 0.2s;
+        }
+
+        .rodape-coluna a:hover {
+            color: var(--verde);
+            padding-left: 5px; /* Pequeno deslocamento para dar sensação de movimento */
+        }
+
+        /* Caixinha de horário de funcionamento */
+        .horario {
+            background-color: rgba(255, 255, 255, 0.07);
+            border-left: 3px solid var(--verde);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+        }
+
+        /* Linha final do rodapé com os direitos autorais */
+        .direitos {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            padding: 22px 20px;
+            font-size: 0.83rem;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        /* =====================================================================
+           9) RESPONSIVIDADE (AJUSTES PARA CELULAR)
+           Tudo dentro de @media só vale quando a tela for MENOR que 768px (tablets e celulares).
+           ===================================================================== */
+        @media (max-width: 768px) {
+
+            /* No celular, o banner fica com menos espaço e o título menor */
+            .banner {
+                padding: 60px 18px;
+            }
+
+            .banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .banner p {
+                font-size: 1rem;
+            }
+
+            /* No celular, o logo, a busca e o carrinho ficam centralizados um embaixo do outro */
+            .topo {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.15rem;
+            }
+
+            .busca {
+                max-width: 100%; /* A busca ocupa a largura toda */
+                order: 3;        /* "order:3" faz a busca ir para a última posição (embaixo de tudo) */
+            }
+
+            /* Reduz o espaço das seções para o site não ficar "comprido demais" no celular */
+            section {
+                padding: 50px 0;
+            }
+
+            .titulo-secao h2 {
+                font-size: 1.6rem;
+            }
+
+            .sobre-texto h2 {
+                font-size: 1.5rem;
+            }
+
+            /* No celular, a imagem do "Sobre Nós" fica acima do texto, sem o espaço grande */
+            .sobre-conteudo {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- =====================================================================
+         CABEÇALHO DO SITE
+         A tag <header> define o cabeçalho, onde ficam o logo, a busca, o carrinho e o menu.
+         ===================================================================== -->
+    <header>
+        <div class="container">
+            <!-- A classe "topo" organiza logo + busca + carrinho lado a lado -->
+            <div class="topo">
+
+                <!-- A tag <a> é um LINK. Aqui ela leva o cliente de volta ao topo (Início). -->
+                <a href="#inicio" class="logo" aria-label="Farmácia Vida e Saúde - Página inicial">
+                    <!-- Este quadradinho é o símbolo da farmácia (a cruz) -->
+                    <span class="logo-icone">+</span>
+                    <!-- A tag <span> serve para marcar um pedacinho do texto e estilizar só ele -->
+                    <span>Farmácia <span class="destaque">Vida &amp; Saúde</span></span>
+                </a>
+
+                <!-- Área de busca. A tag <form> agrupa campos que o cliente preenche. -->
+                <form class="busca" onsubmit="event.preventDefault(); alert('Busca demonstrativa! Em breve integrada ao sistema da farmácia.');">
+                    <!-- <input> é o campo onde o cliente digita. O "placeholder" é o texto de exemplo dentro dele. -->
+                    <input type="search" placeholder="O que você procura? Ex: dipirona, fralda..." aria-label="Buscar produtos">
+                    <!-- <button> é o botão clicável -->
+                    <button type="submit">Buscar</button>
+                </form>
+
+                <!-- Carrinho de compras. A tag <button> indica que é clicável. -->
+                <button class="carrinho" aria-label="Abrir carrinho de compras">
+                    <!-- O <svg> desenha o ícone do carrinho sem precisar baixar imagem nenhuma -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span>Carrinho</span>
+                    <!-- Este é o contador de itens no carrinho -->
+                    <span class="contador">0</span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- A tag <nav> indica uma área de NAVEGAÇÃO (o menu do site). -->
+        <nav>
+            <div class="container">
+                <!-- <ul> cria uma LISTA e <li> cria cada ITEM da lista -->
+                <ul class="menu">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#medicamentos">Medicamentos</a></li>
+                    <li><a href="#higiene">Higiene &amp; Beleza</a></li>
+                    <li><a href="#ofertas">Ofertas</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- =====================================================================
+         CONTEÚDO PRINCIPAL
+         A tag <main> envolve o conteúdo mais importante da página.
+         ===================================================================== -->
+    <main>
+
+        <!-- ---------- BANNER PRINCIPAL ---------- -->
+        <!-- O "id" serve de "apelido" para os links do menu encontrarem esta seção -->
+        <section class="banner" id="inicio">
+            <div class="container">
+                <h1>Cuidar da sua saúde é a nossa especialidade</h1>
+                <p>Medicamentos, higiene, beleza e bem-estar com atendimento rápido, preço justo e farmacêutico de plantão todos os dias.</p>
+                <!-- O link abaixo leva o cliente direto para a seção de ofertas -->
+                <a href="#ofertas" class="botao">Ver Ofertas</a>
+            </div>
+        </section>
+
+        <!-- ---------- PRODUTOS EM DESTAQUE ---------- -->
+        <section id="ofertas">
+            <div class="container">
+                <div class="titulo-secao">
+                    <h2>Produtos em Destaque</h2>
+                    <p>As melhores ofertas da semana, selecionadas para você e sua família</p>
+                </div>
+
+                <!-- A classe "grade-produtos" organiza os cards em colunas automáticas -->
+                <div class="grade-produtos">
+
+                    <!-- ===== CARD 1: DIPIRONA ===== -->
+                    <!-- A tag <article> representa um conteúdo independente, como um produto. -->
+                    <article class="card" id="medicamentos">
+                        <span class="selo">-20%</span>
+                        <!-- A tag <img> mostra a imagem. O "alt" é o texto que aparece se a imagem não carregar e é lido por leitores de tela. -->
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+                             alt="Cartela de comprimidos de dipirona sobre superfície clara">
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Medicamento</span>
+                            <h3>Dipirona Sódica 500mg</h3>
+                            <p class="descricao">Caixa com 20 comprimidos. Alívio da dor e da febre.</p>
+                            <div class="preco">
+                                <span class="preco-antigo">R$ 12,90</span>
+                                <span class="preco-atual">R$ 10,32</span>
+                            </div>
+                            <button class="botao-comprar">Comprar</button>
+                        </div>
+                    </article>
+
+                    <!-- ===== CARD 2: PROTETOR SOLAR ===== -->
+                    <article class="card" id="higiene">
+                        <span class="selo">-15%</span>
+                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80"
+                             alt="Frasco de protetor solar ao lado de folhas verdes">
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Higiene &amp; Beleza</span>
+                            <h3>Protetor Solar FPS 50</h3>
+                            <p class="descricao">Proteção UVA/UVB, toque seco, 120ml. Ideal para o dia a dia.</p>
+                            <div class="preco">
+                                <span class="preco-antigo">R$ 69,90</span>
+                                <span class="preco-atual">R$ 59,42</span>
+                            </div>
+                            <button class="botao-comprar">Comprar</button>
+                        </div>
+                    </article>
+
+                    <!-- ===== CARD 3: VITAMINA C ===== -->
+                    <article class="card">
+                        <span class="selo">-25%</span>
+                        <img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=600&q=80"
+                             alt="Laranjas frescas cortadas, fonte natural de vitamina C">
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Vitaminas</span>
+                            <h3>Vitamina C 1g Efervescente</h3>
+                            <p class="descricao">Tubo com 10 comprimidos sabor laranja. Reforço para a imunidade.</p>
+                            <div class="preco">
+                                <span class="preco-antigo">R$ 32,00</span>
+                                <span class="preco-atual">R$ 24,00</span>
+                            </div>
+                            <button class="botao-comprar">Comprar</button>
+                        </div>
+                    </article>
+
+                    <!-- ===== CARD 4: FRALDA INFANTIL ===== -->
+                    <article class="card">
+                        <span class="selo">-10%</span>
+                        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80"
+                             alt="Bebê sorrindo usando fralda descartável">
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Infantil</span>
+                            <h3>Fralda Infantil Tam. M</h3>
+                            <p class="descricao">Pacote com 40 unidades. Alta absorção e maciez para o bebê.</p>
+                            <div class="preco">
+                                <span class="preco-antigo">R$ 54,90</span>
+                                <span class="preco-atual">R$ 49,41</span>
+                            </div>
+                            <button class="botao-comprar">Comprar</button>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- SOBRE NÓS ---------- -->
+        <section class="sobre" id="sobre">
+            <div class="container">
+                <div class="sobre-conteudo">
+
+                    <!-- Coluna da imagem -->
+                    <div class="sobre-imagem">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
+                             alt="Farmacêutica sorrindo enquanto atende um cliente na farmácia">
+                    </div>
+
+                    <!-- Coluna do texto -->
+                    <div class="sobre-texto">
+                        <h2>Mais de 20 anos cuidando de quem você ama</h2>
+                        <p>
+                            A <strong>Farmácia Vida &amp; Saúde</strong> nasceu com um propósito simples:
+                            oferecer saúde de verdade, com gente que conhece você pelo nome. Aqui, o atendimento
+                            é rápido, humano e sem complicação.
+                        </p>
+                        <p>
+                            Nossa equipe conta com farmacêuticos disponíveis para tirar dúvidas sobre receitas,
+                            interações medicamentosas e aplicação de injetáveis — sempre com o cuidado que a sua
+                            família merece.
+                        </p>
+
+                        <!-- <strong> deixa o texto em NEGRITO (dando importância à palavra) -->
+                        <ul class="lista-vantagens">
+                            <li>Entrega rápida em até 2 horas no bairro</li>
+                            <li>Farmácia com manipulação própria</li>
+                            <li>Programa de descontos para clientes fiéis</li>
+                            <li>Aplicação de injetáveis sem agendamento</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =====================================================================
+         RODAPÉ
+         A tag <footer> guarda as informações finais do site: contato, endereço,
+         horário de funcionamento, redes sociais e direitos autorais.
+         ===================================================================== -->
+    <footer id="contato">
+        <div class="container">
+            <div class="rodape-grade">
+
+                <!-- Coluna 1: contato e endereço -->
+                <div class="rodape-coluna">
+                    <h4>Farmácia Vida &amp; Saúde</h4>
+                    <!-- A tag <address> é usada para informações de contato. -->
+                    <address style="font-style: normal;">
+                        <p>📍 Rua das Acácias, 1234 — Centro<br>São Paulo/SP — CEP 01234-000</p>
+                        <p>📞 (11) 3456-7890</p>
+                        <p>📱 WhatsApp: (11) 98765-4321</p>
+                        <p>✉️ contato@vidaesaude.com.br</p>
+                    </address>
+                </div>
+
+                <!-- Coluna 2: horário de funcionamento -->
+                <div class="rodape-coluna">
+                    <h4>Horário de Funcionamento</h4>
+                    <div class="horario">
+                        <p>Segunda a Sexta: 07h às 22h</p>
+                        <p>Sábado: 08h às 20h</p>
+                        <p>Domingo e feriados: 09h às 18h</p>
+                        <p><strong>Plantão 24h para emergências</strong></p>
+                    </div>
+                </div>
+
+                <!-- Coluna 3: links úteis e redes sociais -->
+                <div class="rodape-coluna">
+                    <h4>Links &amp; Redes Sociais</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#medicamentos">Medicamentos</a></li>
+                        <li><a href="#higiene">Higiene &amp; Beleza</a></li>
+                        <li><a href="#ofertas">Ofertas da Semana</a></li>
+                        <!-- O atributo target="_blank" abre o link em uma nova aba -->
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+                        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://wa.me/5511987654321" target="_blank" rel="noopener">WhatsApp</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Linha final com os direitos autorais. O símbolo &copy; vira © -->
+        <div class="direitos">
+            <p>&copy; 2026 Farmácia Vida &amp; Saúde — Todos os direitos reservados. | CNPJ 00.000.000/0001-00</p>
+            <p>Este site é demonstrativo. Preços e produtos sujeitos a alteração sem aviso prévio.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
