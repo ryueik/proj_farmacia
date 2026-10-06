@@ -125,19 +125,16 @@ cd proj_farmacia
 Estudante de **Gestão da Tecnologia da Informação** — Projeto Integrador Transdisciplinar (PIT).
 
 <p align="left">
-  <a href="https://www.linkedin.com/in/seu-linkedin" target="_blank">
+  <a href="https://www.linkedin.com/in/dev-mathes-macario" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
   </a>
   <a href="https://github.com/ryueik" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
   </a>
-  <a href="mailto:seu-email@exemplo.com">
+  <a href="mailto:matheusmgmgdossantos@gmail.com">
     <img src="https://img.shields.io/badge/E--mail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="E-mail" />
   </a>
 </p>
-
-> [!TIP]
-> Substitua os links de **LinkedIn** e **e-mail** pelos seus dados reais antes de publicar.
 
 ---
 
