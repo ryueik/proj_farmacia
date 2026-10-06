@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- A declaração <!DOCTYPE html> avisa ao navegador que este arquivo é um documento HTML5 (a versão mais moderna). -->
+<!-- A declaração <!DOCTYPE html> avisa ao navegador que este arquivo é um documento HTML5 (a versão mais moderna da linguagem). -->
 <html lang="pt-BR">
-<!-- A tag <html> é a "raiz" de todo o site. O atributo lang="pt-BR" informa que o conteúdo está em português do Brasil (isso ajuda leitores de tela e o Google). -->
+<!-- A tag <html> é a "raiz" de todo o site. O atributo lang="pt-BR" informa que o conteúdo está em português do Brasil (ajuda leitores de tela e o Google). -->
 
 <head>
-    <!-- A tag <head> guarda as CONFIGURAÇÕES da página. Nada aqui aparece visualmente para o cliente. -->
+    <!-- A tag <head> guarda as CONFIGURAÇÕES da página. Nada aqui aparece visualmente para o cliente, mas tudo é essencial para o site funcionar bem. -->
 
     <meta charset="UTF-8">
     <!-- charset="UTF-8" permite usar acentos (á, ç, ã) corretamente, sem aparecer "símbolos estranhos". -->
@@ -12,11 +12,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Esta linha é ESSENCIAL para o site funcionar bem no celular: ela faz a página se adaptar à largura da tela do aparelho. -->
 
-    <title>Farmácia Vida & Saúde | Sua saúde em primeiro lugar</title>
+    <title>Farmácia Vida & Saúde | Medicamentos, Higiene, Beleza e Ofertas</title>
     <!-- O <title> é o texto que aparece na aba do navegador e no resultado do Google. -->
 
-    <meta name="description" content="Farmácia Vida & Saúde: medicamentos, higiene, beleza e ofertas com atendimento rápido e humanizado.">
+    <meta name="description" content="Farmácia Vida & Saúde: medicamentos, higiene, beleza, vitaminas e ofertas com atendimento rápido, entrega em 2h e farmacêutico de plantão 24h.">
     <!-- A "description" é o resuminho que aparece no Google. Ajuda novos clientes a encontrarem a farmácia. -->
+
+    <meta name="keywords" content="farmácia, medicamentos, dipirona, protetor solar, vitamina C, fralda, entrega de remédio, farmácia 24h">
+    <!-- A "keywords" lista palavras-chave relacionadas ao site (uso opcional, mas ajuda em buscas antigas). -->
 
     <style>
         /* =====================================================================
@@ -25,32 +28,36 @@
            ===================================================================== */
 
         /* ---------------------------------------------------------------------
-           1) VARIÁVEIS DE COR
+           1) VARIÁVEIS DE COR E MEDIDAS
            Criamos "apelidos" para as cores. Assim, se um dia a farmácia quiser
            trocar o azul, basta mudar AQUI (em um lugar só) e o site inteiro muda.
            --------------------------------------------------------------------- */
         :root {
-            --azul-escuro: #0d4f6c;   /* Azul escuro: usado no cabeçalho e no rodapé */
-            --azul: #1e88a8;          /* Azul médio: usado em botões e detalhes */
+            --azul-escuro: #0a3d5c;   /* Azul bem escuro: usado no cabeçalho e rodapé */
+            --azul: #1e88a8;          /* Azul médio: usado em botões e links */
             --azul-claro: #e8f4f8;    /* Azul bem clarinho: usado em fundos suaves */
             --verde: #2fb380;         /* Verde: cor de "saúde", usada em destaques e preços */
-            --verde-escuro: #23906a;  /* Verde mais escuro: usado quando o mouse passa por cima do botão */
+            --verde-escuro: #23906a;  /* Verde mais escuro: usado quando o mouse passa por cima */
+            --amarelo: #f5a623;       /* Amarelo: usado em estrelas de avaliação e selos especiais */
+            --vermelho: #e74c3c;      /* Vermelho: usado em promoções e alertas */
             --branco: #ffffff;        /* Branco puro */
             --cinza-texto: #4a5568;   /* Cinza para textos: mais confortável de ler que o preto puro */
             --cinza-claro: #f4f8fb;   /* Cinza azulado bem claro: fundo de algumas seções */
+            --borda: #e6eef4;         /* Cor padrão das bordas (linhas finas) */
             --sombra: 0 4px 14px rgba(13, 79, 108, 0.10); /* Sombra suave usada nos cards */
+            --sombra-forte: 0 14px 28px rgba(13, 79, 108, 0.18); /* Sombra mais forte (hover) */
             --arredondado: 14px;      /* Medida padrão de arredondamento dos cantos */
         }
 
         /* ---------------------------------------------------------------------
            2) RESET BÁSICO
-           Os navegadores (Chrome, Edge, etc.) colocam espaçamentos diferentes por padrão.
+           Os navegadores colocam espaçamentos diferentes por padrão.
            Estas regras "zeram" tudo para começarmos do mesmo ponto em todos eles.
            --------------------------------------------------------------------- */
         * {
-            margin: 0;              /* margin = espaço POR FORA do elemento. Zero em todos. */
-            padding: 0;             /* padding = espaço POR DENTRO do elemento. Zero em todos. */
-            box-sizing: border-box; /* Faz padding e borda serem contados DENTRO da largura. Evita que elementos "estourem" a tela. */
+            margin: 0;              /* margin = espaço POR FORA do elemento */
+            padding: 0;             /* padding = espaço POR DENTRO do elemento */
+            box-sizing: border-box; /* Faz padding e borda serem contados DENTRO da largura */
         }
 
         /* Rolagem suave: quando o cliente clicar em um link do menu, a página desliza em vez de pular. */
@@ -61,46 +68,99 @@
         /* Estilo geral do texto do site */
         body {
             font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; /* Fonte limpa e fácil de ler */
-            color: var(--cinza-texto);  /* Cor padrão de todos os textos */
+            color: var(--cinza-texto);       /* Cor padrão de todos os textos */
             background-color: var(--branco); /* Cor de fundo geral da página */
-            line-height: 1.6;           /* Espaço entre as linhas do texto. Deixa a leitura mais leve. */
+            line-height: 1.6;                /* Espaço entre as linhas do texto */
+            overflow-x: hidden;              /* Impede que apareça barra de rolagem horizontal */
         }
 
         /* Remove o "sublinhado" dos links e usa a cor que definirmos */
         a {
             text-decoration: none;
-            color: inherit; /* "inherit" = herda a cor do elemento pai (o de cima) */
+            color: inherit;
         }
 
-        /* Todo elemento com a classe .container fica centralizado e com largura máxima.
-           Isso evita que o conteúdo fique esticado demais em telas grandes. */
+        /* Remove as "bolinhas" de TODAS as listas do site */
+        ul, ol {
+            list-style: none;
+        }
+
+        /* Faz imagens nunca ultrapassarem o tamanho do seu "pai" */
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Botões herdam a fonte do site por padrão */
+        button {
+            font-family: inherit;
+        }
+
+        /* Todo elemento com a classe .container fica centralizado e com largura máxima. */
         .container {
             width: 100%;
-            max-width: 1180px;  /* Largura máxima do conteúdo */
+            max-width: 1200px;  /* Largura máxima do conteúdo */
             margin: 0 auto;     /* "0 auto" = zero em cima/baixo e AUTOMÁTICO nas laterais => centraliza */
-            padding: 0 20px;    /* Respiro nas laterais para o texto não encostar na borda no celular */
+            padding: 0 20px;    /* Respiro nas laterais para não encostar na borda no celular */
         }
 
         /* =====================================================================
-           3) CABEÇALHO (HEADER)
+           3) BARRA SUPERIOR (TOP BAR)
+           Faixa fina acima do cabeçalho com telefone, frete grátis e horário.
+           ===================================================================== */
+        .top-bar {
+            background-color: #062a40; /* Azul ainda mais escuro que o cabeçalho */
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.82rem;
+            padding: 9px 0;
+        }
+
+        .top-bar-conteudo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;    /* Permite quebrar linha no celular */
+            gap: 12px;
+        }
+
+        .top-bar-esquerda {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .top-bar-direita {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        /* Destaque em verde dentro da top-bar */
+        .top-bar .destaque {
+            color: #7fe3bd;
+            font-weight: 700;
+        }
+
+        /* =====================================================================
+           4) CABEÇALHO (HEADER)
            ===================================================================== */
         header {
-            background-color: var(--azul-escuro); /* Cor de fundo do cabeçalho */
-            color: var(--branco);                 /* Cor do texto dentro do cabeçalho */
-            position: sticky;                     /* "sticky" faz o cabeçalho GRUDAR no topo quando rolamos a página */
-            top: 0;                               /* Diz que ele deve grudar no topo (0 = topo) */
-            z-index: 1000;                        /* z-index controla quem fica "na frente". 1000 garante que o cabeçalho fique acima do resto. */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Sombra embaixo do cabeçalho */
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            position: sticky;   /* Faz o cabeçalho GRUDAR no topo quando rolamos */
+            top: 0;
+            z-index: 1000;      /* Fica "na frente" de todo o resto */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         }
 
         /* Faixa de cima do cabeçalho: logo + busca + carrinho */
         .topo {
-            display: flex;             /* display:flex organiza os itens UM AO LADO DO OUTRO (em linha) */
-            align-items: center;       /* Alinha os itens pelo CENTRO na vertical */
-            justify-content: space-between; /* Espalha os itens: primeiro na esquerda, último na direita */
-            gap: 20px;                 /* Espaço mínimo entre os itens */
-            padding: 14px 0;           /* Espaço interno em cima e embaixo */
-            flex-wrap: wrap;           /* Se não couber na largura, os itens "pulam" para a linha de baixo (importante no celular) */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 14px 0;
+            flex-wrap: wrap;
         }
 
         /* Área do logotipo (ícone + nome) */
@@ -108,70 +168,100 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.35rem;   /* 1.35rem = 1.35 vezes o tamanho padrão de fonte */
-            font-weight: 700;     /* Negrito */
+            font-size: 1.35rem;
+            font-weight: 700;
             letter-spacing: 0.3px;
         }
 
         /* O quadradinho com a cruz (símbolo da farmácia) */
         .logo-icone {
-            width: 42px;
-            height: 42px;
-            background-color: var(--verde); /* Fundo verde */
-            border-radius: 12px;            /* Cantos arredondados */
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--verde) 0%, var(--azul) 100%); /* Degradê verde → azul */
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--branco);
-            flex-shrink: 0; /* Impede que o ícone seja "esmagado" em telas pequenas */
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(47, 179, 128, 0.35);
         }
 
-        /* A parte "Vida & Saúde" ganha uma cor diferente do "Farmácia" */
         .logo span.destaque {
-            color: #7fe3bd; /* Verde clarinho, para dar contraste no fundo azul escuro */
+            color: #7fe3bd;
         }
 
-        /* Caixa de busca (campo de digitação) */
+        /* Caixa de busca */
         .busca {
             display: flex;
             align-items: center;
             background-color: var(--branco);
-            border-radius: 30px;  /* Cantos bem arredondados => parece uma "pílula" */
+            border-radius: 30px;
             padding: 6px 6px 6px 18px;
-            flex: 1;              /* "flex:1" faz esta caixa ocupar todo o espaço que sobrar */
-            min-width: 220px;     /* Largura mínima para não ficar apertada demais */
-            max-width: 460px;     /* Largura máxima para não ficar gigante em telas grandes */
+            flex: 1;
+            min-width: 220px;
+            max-width: 480px;
+            transition: box-shadow 0.25s;
         }
 
-        /* O campo onde o cliente digita o remédio */
+        /* Quando o cliente clica na busca, ela ganha um brilho verde */
+        .busca:focus-within {
+            box-shadow: 0 0 0 4px rgba(47, 179, 128, 0.35);
+        }
+
         .busca input {
-            border: none;        /* Remove a bordinha padrão do navegador */
-            outline: none;       /* Remove o contorno azul quando clicamos */
-            flex: 1;             /* Ocupa todo o espaço disponível dentro da caixa de busca */
+            border: none;
+            outline: none;
+            flex: 1;
             font-size: 0.95rem;
             color: var(--cinza-texto);
-            background: transparent; /* Fundo transparente (mostra o branco da caixa) */
+            background: transparent;
             padding: 8px 0;
         }
 
-        /* O botão "Buscar" dentro da caixa */
         .busca button {
-            background-color: var(--azul);  /* Fundo azul */
-            color: var(--branco);           /* Texto branco */
-            border: none;                   /* Sem borda */
-            border-radius: 24px;            /* Arredondado */
+            background-color: var(--azul);
+            color: var(--branco);
+            border: none;
+            border-radius: 24px;
             padding: 9px 18px;
             font-size: 0.9rem;
             font-weight: 600;
-            cursor: pointer;                /* Muda o cursor para a "mãozinha" ao passar o mouse */
-            transition: background-color 0.25s; /* Suaviza a troca de cor */
+            cursor: pointer;
+            transition: background-color 0.25s;
         }
 
-        /* Quando o mouse passa por cima do botão de busca */
         .busca button:hover {
-            background-color: var(--verde); /* A cor muda para verde */
+            background-color: var(--verde);
+        }
+
+        /* Área de ações do cliente (favoritos + carrinho) */
+        .acoes-cliente {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Botão de favoritos (ícone de coração) */
+        .botao-icone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            color: var(--branco);
+            cursor: pointer;
+            transition: background-color 0.25s;
+            position: relative;
+        }
+
+        .botao-icone:hover {
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         /* Botão do carrinho de compras */
@@ -179,31 +269,49 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background-color: rgba(255, 255, 255, 0.12); /* Branco "transparente" para destacar no fundo azul */
+            background-color: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 30px;
-            padding: 9px 16px;
+            padding: 10px 16px;
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--branco);
             transition: background-color 0.25s;
-            position: relative; /* Necessário para posicionar a "bolinha" com o número de itens */
+            position: relative;
         }
 
         .carrinho:hover {
             background-color: rgba(255, 255, 255, 0.25);
         }
 
-        /* A bolinha vermelha com a quantidade de produtos no carrinho */
+        /* Bolinha vermelha com a quantidade de produtos */
         .carrinho .contador {
-            background-color: #e74c3c; /* Vermelho */
+            background-color: var(--vermelho);
             color: var(--branco);
             font-size: 0.7rem;
             font-weight: 700;
-            width: 20px;
+            min-width: 20px;
             height: 20px;
-            border-radius: 50%;       /* 50% de arredondamento = círculo perfeito */
+            padding: 0 5px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bolinha vermelha no coração de favoritos */
+        .botao-icone .badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background-color: var(--vermelho);
+            color: var(--branco);
+            font-size: 0.65rem;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -213,95 +321,268 @@
            MENU DE NAVEGAÇÃO
            --------------------------------------------------------------------- */
         nav {
-            background-color: rgba(0, 0, 0, 0.15); /* Faixa um pouco mais escura que o cabeçalho */
+            background-color: rgba(0, 0, 0, 0.15);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* A lista de links do menu */
         .menu {
-            display: flex;       /* Coloca os itens do menu um ao lado do outro */
-            list-style: none;    /* Remove as "bolinhas" da lista */
-            gap: 6px;            /* Espaço entre cada link */
-            flex-wrap: wrap;     /* Permite quebrar linha no celular */
-            justify-content: center; /* Centraliza os links */
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Cada link do menu */
         .menu a {
-            display: block;             /* Faz o link ocupar toda a área clicável */
-            padding: 13px 18px;         /* Área de clique confortável (bom para o dedo no celular) */
+            display: block;
+            padding: 13px 18px;
             font-size: 0.93rem;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
-            border-bottom: 3px solid transparent; /* Linha invisível embaixo (vai aparecer no hover) */
+            border-bottom: 3px solid transparent;
             transition: all 0.25s;
         }
 
-        /* Quando o mouse passa por cima do link do menu */
         .menu a:hover {
             color: var(--branco);
             background-color: rgba(255, 255, 255, 0.08);
-            border-bottom-color: var(--verde); /* A linha de baixo fica verde */
+            border-bottom-color: var(--verde);
+        }
+
+        /* Item do menu que está com promoção (ganha um destaque vermelho) */
+        .menu a.promo {
+            color: #ffb8b8;
+        }
+
+        .menu a.promo::after {
+            content: "🔥";   /* Emoji de fogo ao lado de "Ofertas" */
+            margin-left: 4px;
         }
 
         /* =====================================================================
-           4) BANNER PRINCIPAL (HERO)
+           5) BANNER PRINCIPAL (HERO)
            ===================================================================== */
         .banner {
-            /* A imagem de fundo é aplicada via CSS. "cover" faz ela cobrir todo o espaço sem distorcer. */
-            background-image: linear-gradient(rgba(13, 79, 108, 0.78), rgba(13, 79, 108, 0.78)),
+            background-image: linear-gradient(rgba(10, 61, 92, 0.82), rgba(10, 61, 92, 0.82)),
                               url("https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1600&q=80");
-            background-size: cover;        /* A imagem cobre todo o banner */
-            background-position: center;   /* Centraliza a imagem */
+            background-size: cover;
+            background-position: center;
             color: var(--branco);
-            text-align: center;            /* Centraliza o texto */
-            padding: 90px 20px;            /* Bastante espaço interno para o banner ficar "grande" */
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* O título grande do banner */
+        /* Círculos decorativos ao fundo do banner (efeito visual) */
+        .banner::before,
+        .banner::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            pointer-events: none; /* Não interfere nos cliques */
+        }
+
+        .banner::before {
+            width: 400px;
+            height: 400px;
+            background-color: var(--verde);
+            top: -120px;
+            right: -100px;
+        }
+
+        .banner::after {
+            width: 300px;
+            height: 300px;
+            background-color: var(--branco);
+            bottom: -100px;
+            left: -80px;
+        }
+
+        /* O conteúdo do banner fica acima dos círculos decorativos */
+        .banner .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Selo pequeno acima do título do banner */
+        .banner-selo {
+            display: inline-block;
+            background-color: rgba(47, 179, 128, 0.2);
+            border: 1px solid var(--verde);
+            color: #7fe3bd;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 22px;
+            letter-spacing: 0.4px;
+        }
+
         .banner h1 {
-            font-size: 2.6rem;      /* Tamanho grande de fonte */
-            line-height: 1.2;
-            margin-bottom: 18px;    /* Espaço abaixo do título */
-            max-width: 780px;
-            margin-left: auto;      /* "auto" nas laterais + max-width = texto centralizado */
+            font-size: 2.9rem;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            max-width: 820px;
+            margin-left: auto;
             margin-right: auto;
         }
 
-        /* O texto de apoio do banner */
         .banner p {
-            font-size: 1.1rem;
-            max-width: 640px;
-            margin: 0 auto 32px auto; /* Centraliza e dá espaço embaixo */
+            font-size: 1.15rem;
+            max-width: 660px;
+            margin: 0 auto 34px auto;
             color: rgba(255, 255, 255, 0.92);
         }
 
-        /* Botão principal de chamada para ação (CTA) */
+        /* Área com os dois botões principais do banner */
+        .banner-botoes {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        /* Botão principal (CTA verde) */
         .botao {
-            display: inline-block;   /* Fica do tamanho do texto, mas aceita espaçamentos */
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background-color: var(--verde);
             color: var(--branco);
-            padding: 15px 38px;
+            padding: 15px 36px;
             border-radius: 40px;
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             font-weight: 700;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.25s; /* Suaviza o crescimento e a cor */
+            transition: transform 0.2s, background-color 0.25s, box-shadow 0.25s;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
         }
 
-        /* Efeito ao passar o mouse: o botão fica um pouco maior e mais escuro */
         .botao:hover {
             background-color: var(--verde-escuro);
-            transform: translateY(-3px); /* Sobe 3 pixels, dando sensação de "clique" */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Botão secundário (contorno branco) */
+        .botao-secundario {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            color: var(--branco);
+            padding: 15px 36px;
+            border-radius: 40px;
+            font-size: 1.02rem;
+            font-weight: 700;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .botao-secundario:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: var(--branco);
+        }
+
+        /* Estatísticas embaixo do banner (20 anos, 15 mil clientes, etc.) */
+        .banner-estatisticas {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .banner-estatisticas .item {
+            text-align: center;
+        }
+
+        .banner-estatisticas .numero {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #7fe3bd;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .banner-estatisticas .rotulo {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.4px;
         }
 
         /* =====================================================================
-           5) TÍTULOS DAS SEÇÕES
+           6) FAIXA DE VANTAGENS (diferenciais logo abaixo do banner)
+           ===================================================================== */
+        .faixa-vantagens {
+            background-color: var(--branco);
+            padding: 0;
+        }
+
+        .faixa-vantagens-grade {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0;
+            background-color: var(--branco);
+            border-radius: var(--arredondado);
+            box-shadow: var(--sombra);
+            transform: translateY(-40px); /* Faz a faixa "subir" para dentro do banner */
+            overflow: hidden;
+            position: relative;
+            z-index: 3;
+        }
+
+        .vantagem-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 26px 24px;
+            border-right: 1px solid var(--borda);
+        }
+
+        /* O último item não tem borda à direita */
+        .vantagem-item:last-child {
+            border-right: none;
+        }
+
+        /* Quadradinho colorido com o ícone da vantagem */
+        .vantagem-icone {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background-color: var(--azul-claro);
+            color: var(--azul);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+        }
+
+        .vantagem-texto h4 {
+            font-size: 0.95rem;
+            color: var(--azul-escuro);
+            margin-bottom: 2px;
+        }
+
+        .vantagem-texto p {
+            font-size: 0.8rem;
+            color: #7b8794;
+        }
+
+        /* =====================================================================
+           7) TÍTULOS DAS SEÇÕES
            ===================================================================== */
         section {
-            padding: 70px 0; /* Espaço em cima e embaixo de cada seção do site */
+            padding: 70px 0;
         }
 
         .titulo-secao {
@@ -317,86 +598,191 @@
 
         /* A linha verde decorativa embaixo do título */
         .titulo-secao h2::after {
-            content: "";               /* "content" é obrigatório para criar elementos decorativos */
+            content: "";
             display: block;
             width: 70px;
             height: 4px;
             background-color: var(--verde);
             border-radius: 4px;
-            margin: 14px auto 0 auto;  /* Centraliza a linha */
+            margin: 14px auto 0 auto;
         }
 
         .titulo-secao p {
             color: #6b7a8f;
             font-size: 1rem;
+            max-width: 620px;
+            margin: 0 auto;
         }
 
         /* =====================================================================
-           6) GRADE DE PRODUTOS
+           8) CATEGORIAS
+           ===================================================================== */
+        .categorias {
+            background-color: var(--cinza-claro);
+        }
+
+        .grade-categorias {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 18px;
+        }
+
+        /* Cada quadradinho de categoria */
+        .categoria-card {
+            background-color: var(--branco);
+            border: 1px solid var(--borda);
+            border-radius: var(--arredondado);
+            padding: 26px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .categoria-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--verde);
+            box-shadow: var(--sombra);
+        }
+
+        /* Círculo com o ícone da categoria */
+        .categoria-icone {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--azul-claro) 0%, #d5ecf5 100%);
+            color: var(--azul);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: all 0.25s;
+        }
+
+        /* Ao passar o mouse, o ícone fica verde */
+        .categoria-card:hover .categoria-icone {
+            background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+            color: var(--branco);
+        }
+
+        .categoria-card h4 {
+            font-size: 0.92rem;
+            color: var(--azul-escuro);
+            font-weight: 700;
+        }
+
+        .categoria-card span {
+            font-size: 0.75rem;
+            color: #7b8794;
+        }
+
+        /* =====================================================================
+           9) GRADE DE PRODUTOS
            ===================================================================== */
         .grade-produtos {
-            display: grid; /* "grid" cria uma grade (tipo uma tabela invisível) */
-            /* A função repeat(auto-fit, minmax(240px, 1fr)) significa:
-               "crie quantas colunas couberem, cada uma com no mínimo 240px e no máximo 1 fração do espaço".
-               Resultado: 4 colunas no computador, 1 coluna no celular — tudo automático! */
+            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 26px; /* Espaço entre os cards */
+            gap: 26px;
         }
 
         /* Cada card de produto */
         .card {
             background-color: var(--branco);
-            border: 1px solid #e6eef4;
+            border: 1px solid var(--borda);
             border-radius: var(--arredondado);
-            overflow: hidden;  /* Faz a imagem respeitar os cantos arredondados do card */
+            overflow: hidden;
             box-shadow: var(--sombra);
             display: flex;
-            flex-direction: column; /* Coloca imagem, texto e botão UM EMBAIXO DO OUTRO */
+            flex-direction: column;
             transition: transform 0.25s, box-shadow 0.25s;
-            position: relative; /* Para posicionar o selo de desconto */
+            position: relative;
         }
 
-        /* Ao passar o mouse, o card "levanta" um pouco */
         .card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 14px 28px rgba(13, 79, 108, 0.18);
+            box-shadow: var(--sombra-forte);
         }
 
-        /* A imagem do produto */
-        .card img {
-            width: 100%;       /* Ocupa toda a largura do card */
-            height: 190px;     /* Altura fixa para todos ficarem alinhados */
-            object-fit: cover; /* Recorta a imagem para preencher o espaço sem esticar */
+        /* Área da imagem do produto */
+        .card-imagem {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-imagem img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
             background-color: var(--azul-claro);
+            transition: transform 0.4s;
         }
 
-        /* Selo de desconto no canto da imagem */
+        /* Ao passar o mouse, a imagem dá um leve "zoom" */
+        .card:hover .card-imagem img {
+            transform: scale(1.06);
+        }
+
+        /* Selo de desconto */
         .selo {
-            position: absolute; /* "absolute" posiciona o selo em cima da imagem, livremente */
+            position: absolute;
             top: 12px;
             left: 12px;
-            background-color: #e74c3c;
+            background-color: var(--vermelho);
             color: var(--branco);
             font-size: 0.72rem;
             font-weight: 700;
             padding: 5px 12px;
             border-radius: 20px;
             letter-spacing: 0.5px;
+            z-index: 2;
         }
 
-        /* Área de texto do card (título, descrição, preço e botão) */
+        /* Selo "Novo" (usado em alguns produtos) */
+        .selo.novo {
+            background-color: var(--azul);
+        }
+
+        /* Botão de favoritar (coração) em cima da imagem */
+        .favoritar {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border: none;
+            border-radius: 50%;
+            color: #7b8794;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+
+        .favoritar:hover {
+            background-color: var(--vermelho);
+            color: var(--branco);
+            transform: scale(1.1);
+        }
+
+        /* Área de texto do card */
         .card-conteudo {
             padding: 20px;
             display: flex;
             flex-direction: column;
-            flex: 1;  /* Faz todos os cards terem a mesma altura, empurrando o botão para baixo */
+            flex: 1;
         }
 
-        /* Categoria pequenininha acima do nome do produto */
         .card-categoria {
             font-size: 0.72rem;
             font-weight: 700;
-            text-transform: uppercase; /* Deixa o texto em MAIÚSCULAS */
+            text-transform: uppercase;
             letter-spacing: 0.8px;
             color: var(--azul);
             margin-bottom: 6px;
@@ -406,38 +792,63 @@
             font-size: 1.05rem;
             color: var(--azul-escuro);
             margin-bottom: 6px;
+            line-height: 1.3;
         }
 
         .card .descricao {
             font-size: 0.85rem;
             color: #7b8794;
-            margin-bottom: 16px;
-            flex: 1; /* Ocupa o espaço que sobra, alinhando os preços */
+            margin-bottom: 12px;
+            flex: 1;
+        }
+
+        /* Estrelinhas de avaliação do produto */
+        .avaliacao {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            color: var(--amarelo);
+            margin-bottom: 12px;
+        }
+
+        .avaliacao span {
+            color: #7b8794;
+            margin-left: 4px;
+            font-size: 0.78rem;
         }
 
         /* Linha do preço */
         .preco {
             display: flex;
-            align-items: baseline; /* Alinha os textos pela base (parte de baixo das letras) */
+            align-items: baseline;
             gap: 8px;
             margin-bottom: 14px;
+            flex-wrap: wrap;
         }
 
-        /* Preço antigo, riscado */
         .preco-antigo {
             font-size: 0.85rem;
             color: #a0aec0;
-            text-decoration: line-through; /* Cria o risco no meio do texto */
+            text-decoration: line-through;
         }
 
-        /* Preço atual, em destaque */
         .preco-atual {
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--verde);
         }
 
-        /* Botão "Comprar" dentro do card */
+        /* Texto pequeno abaixo do preço (parcelamento) */
+        .parcelamento {
+            font-size: 0.75rem;
+            color: #7b8794;
+            margin-bottom: 14px;
+            display: block;
+            margin-top: -8px;
+        }
+
+        /* Botão "Comprar" */
         .botao-comprar {
             width: 100%;
             background-color: var(--azul);
@@ -448,38 +859,222 @@
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.25s;
+            transition: background-color 0.25s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .botao-comprar:hover {
             background-color: var(--verde);
         }
 
-        /* =====================================================================
-           7) SEÇÃO "SOBRE NÓS"
-           ===================================================================== */
-        .sobre {
-            background-color: var(--cinza-claro); /* Fundo cinza-claro para diferenciar a seção */
+        /* Efeito de "apertar" quando o botão é clicado */
+        .botao-comprar:active {
+            transform: scale(0.97);
         }
 
-        /* Aqui usamos flex para colocar a imagem ao lado do texto */
+        /* Botão "Ver todos os produtos" no fim da grade */
+        .ver-todos {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        .ver-todos a {
+            display: inline-block;
+            color: var(--azul);
+            font-weight: 700;
+            padding: 12px 30px;
+            border: 2px solid var(--azul);
+            border-radius: 40px;
+            transition: all 0.25s;
+            font-size: 0.95rem;
+        }
+
+        .ver-todos a:hover {
+            background-color: var(--azul);
+            color: var(--branco);
+        }
+
+        /* =====================================================================
+           10) BANNER DE PROMOÇÃO ESPECIAL
+           ===================================================================== */
+        .promo-especial {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul) 100%);
+            color: var(--branco);
+            border-radius: var(--arredondado);
+            padding: 50px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            flex-wrap: wrap;
+            box-shadow: var(--sombra-forte);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Círculo decorativo no fundo da promoção */
+        .promo-especial::after {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.06);
+            right: -100px;
+            top: -100px;
+        }
+
+        .promo-especial-texto {
+            position: relative;
+            z-index: 2;
+            flex: 1 1 400px;
+        }
+
+        .promo-especial-texto .tag {
+            display: inline-block;
+            background-color: var(--vermelho);
+            color: var(--branco);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .promo-especial-texto h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .promo-especial-texto p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 26px;
+        }
+
+        /* Código do cupom dentro de um quadradinho pontilhado */
+        .cupom {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 2px dashed rgba(255, 255, 255, 0.6);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+            color: #7fe3bd;
+        }
+
+        /* =====================================================================
+           11) SEÇÃO DE SERVIÇOS
+           ===================================================================== */
+        .servicos {
+            background-color: var(--cinza-claro);
+        }
+
+        .grade-servicos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .servico-card {
+            background-color: var(--branco);
+            border-radius: var(--arredondado);
+            padding: 34px 26px;
+            text-align: center;
+            border: 1px solid var(--borda);
+            transition: all 0.3s;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-forte);
+            border-color: var(--verde);
+        }
+
+        .servico-icone {
+            width: 74px;
+            height: 74px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--azul-claro) 0%, #d5ecf5 100%);
+            color: var(--azul);
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            transition: all 0.3s;
+        }
+
+        .servico-card:hover .servico-icone {
+            background: linear-gradient(135deg, var(--verde) 0%, var(--verde-escuro) 100%);
+            color: var(--branco);
+            transform: rotate(-5deg);
+        }
+
+        .servico-card h3 {
+            font-size: 1.15rem;
+            color: var(--azul-escuro);
+            margin-bottom: 10px;
+        }
+
+        .servico-card p {
+            font-size: 0.9rem;
+            color: #7b8794;
+            line-height: 1.6;
+        }
+
+        /* =====================================================================
+           12) SEÇÃO "SOBRE NÓS"
+           ===================================================================== */
         .sobre-conteudo {
             display: flex;
             align-items: center;
             gap: 50px;
-            flex-wrap: wrap; /* No celular, um item vai para baixo do outro */
+            flex-wrap: wrap;
         }
 
-        /* A imagem ocupa 45% da largura; o texto, o restante */
         .sobre-imagem {
             flex: 1 1 320px;
+            position: relative;
         }
 
         .sobre-imagem img {
             width: 100%;
             border-radius: var(--arredondado);
             box-shadow: var(--sombra);
-            display: block; /* Remove um pequeno espaço vazio que aparece embaixo das imagens */
+        }
+
+        /* Selo "20+ anos" sobreposto na imagem */
+        .sobre-selo {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--verde);
+            color: var(--branco);
+            padding: 16px 22px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .sobre-selo .numero {
+            font-size: 1.9rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .sobre-selo .texto {
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
         }
 
         .sobre-texto {
@@ -492,56 +1087,422 @@
             margin-bottom: 18px;
         }
 
-        .sobre-texto p {
+        .sobre-texto > p {
             margin-bottom: 16px;
             font-size: 1rem;
         }
 
-        /* Lista de vantagens com "✔" */
         .lista-vantagens {
-            list-style: none; /* Remove as bolinhas padrão da lista */
             margin-top: 22px;
         }
 
         .lista-vantagens li {
-            padding: 9px 0 9px 32px; /* Espaço à esquerda para caber o ícone */
-            position: relative;      /* Permite posicionar o "✔" de forma absoluta */
+            padding: 9px 0 9px 34px;
+            position: relative;
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--azul-escuro);
         }
 
-        /* O "✔" verde criado pelo CSS */
         .lista-vantagens li::before {
             content: "✔";
             position: absolute;
             left: 0;
             top: 50%;
-            transform: translateY(-50%); /* Centraliza o ícone na vertical */
-            width: 22px;
-            height: 22px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
             background-color: var(--verde);
             color: var(--branco);
             border-radius: 50%;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* =====================================================================
-           8) RODAPÉ (FOOTER)
+           13) DEPOIMENTOS DE CLIENTES
+           ===================================================================== */
+        .depoimentos {
+            background-color: var(--cinza-claro);
+        }
+
+        .grade-depoimentos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .depoimento-card {
+            background-color: var(--branco);
+            border-radius: var(--arredondado);
+            padding: 30px 26px;
+            border: 1px solid var(--borda);
+            box-shadow: var(--sombra);
+            position: relative;
+        }
+
+        /* Aspas decorativas grandes no canto */
+        .depoimento-card::before {
+            content: "❝";
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3.5rem;
+            color: var(--azul-claro);
+            line-height: 1;
+        }
+
+        .depoimento-estrelas {
+            color: var(--amarelo);
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+
+        .depoimento-texto {
+            font-size: 0.93rem;
+            color: var(--cinza-texto);
+            line-height: 1.7;
+            margin-bottom: 22px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        /* Área com a foto, nome e cidade do cliente */
+        .depoimento-autor {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 18px;
+            border-top: 1px solid var(--borda);
+        }
+
+        /* Foto redonda do cliente (com as iniciais, sem precisar de imagem) */
+        .depoimento-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--azul) 0%, var(--verde) 100%);
+            color: var(--branco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .depoimento-autor strong {
+            display: block;
+            font-size: 0.92rem;
+            color: var(--azul-escuro);
+        }
+
+        .depoimento-autor span {
+            font-size: 0.78rem;
+            color: #7b8794;
+        }
+
+        /* =====================================================================
+           14) PERGUNTAS FREQUENTES (FAQ)
+           ===================================================================== */
+        .faq-lista {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* Cada pergunta é um <details> (elemento que abre/fecha sozinho) */
+        .faq-item {
+            background-color: var(--branco);
+            border: 1px solid var(--borda);
+            border-radius: var(--arredondado);
+            margin-bottom: 14px;
+            overflow: hidden;
+            transition: border-color 0.25s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--azul);
+        }
+
+        /* Cabeçalho clicável da pergunta */
+        .faq-item summary {
+            padding: 20px 24px;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            cursor: pointer;  /* Muda o cursor para "mãozinha" */
+            font-size: 1rem;
+            list-style: none; /* Remove a setinha padrão do navegador */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* Remove a seta padrão do <details> */
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Símbolo "+" que vira "−" quando o item é aberto */
+        .faq-item summary::after {
+            content: "+";
+            font-size: 1.6rem;
+            color: var(--verde);
+            font-weight: 400;
+            line-height: 1;
+            transition: transform 0.25s;
+        }
+
+        .faq-item[open] summary::after {
+            content: "−";
+        }
+
+        .faq-item[open] summary {
+            background-color: var(--azul-claro);
+        }
+
+        /* Resposta dentro do FAQ */
+        .faq-resposta {
+            padding: 0 24px 20px 24px;
+            font-size: 0.93rem;
+            color: var(--cinza-texto);
+            line-height: 1.7;
+        }
+
+        /* =====================================================================
+           15) ÁREA DE CONTATO + MAPA
+           ===================================================================== */
+        .contato-area {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 36px;
+            align-items: start;
+        }
+
+        /* Formulário de contato */
+        .formulario {
+            background-color: var(--branco);
+            border-radius: var(--arredondado);
+            padding: 34px;
+            box-shadow: var(--sombra);
+            border: 1px solid var(--borda);
+        }
+
+        .formulario h3 {
+            font-size: 1.3rem;
+            color: var(--azul-escuro);
+            margin-bottom: 8px;
+        }
+
+        .formulario > p {
+            font-size: 0.9rem;
+            color: #7b8794;
+            margin-bottom: 24px;
+        }
+
+        /* Cada campo do formulário */
+        .campo {
+            margin-bottom: 18px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--azul-escuro);
+            margin-bottom: 6px;
+        }
+
+        .campo input,
+        .campo textarea,
+        .campo select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--borda);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-family: inherit;
+            color: var(--cinza-texto);
+            background-color: var(--cinza-claro);
+            transition: all 0.25s;
+        }
+
+        /* Quando o cliente clica no campo, ele ganha destaque azul */
+        .campo input:focus,
+        .campo textarea:focus,
+        .campo select:focus {
+            outline: none;
+            border-color: var(--azul);
+            background-color: var(--branco);
+            box-shadow: 0 0 0 3px rgba(30, 136, 168, 0.15);
+        }
+
+        .campo textarea {
+            resize: vertical; /* O cliente só pode redimensionar para cima/baixo */
+            min-height: 110px;
+        }
+
+        /* Botão de enviar o formulário */
+        .botao-enviar {
+            width: 100%;
+            background-color: var(--verde);
+            color: var(--branco);
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.25s;
+        }
+
+        .botao-enviar:hover {
+            background-color: var(--verde-escuro);
+        }
+
+        /* Coluna da direita: informações + mapa */
+        .info-contato {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        /* Cada bloco de informação (endereço, telefone, horário) */
+        .info-bloco {
+            background-color: var(--branco);
+            border-radius: var(--arredondado);
+            padding: 22px;
+            border: 1px solid var(--borda);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: all 0.25s;
+        }
+
+        .info-bloco:hover {
+            border-color: var(--verde);
+            box-shadow: var(--sombra);
+        }
+
+        .info-icone {
+            width: 44px;
+            height: 44px;
+            background-color: var(--azul-claro);
+            color: var(--azul);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .info-bloco h4 {
+            font-size: 0.95rem;
+            color: var(--azul-escuro);
+            margin-bottom: 4px;
+        }
+
+        .info-bloco p {
+            font-size: 0.87rem;
+            color: var(--cinza-texto);
+            line-height: 1.5;
+        }
+
+        /* Mapa embutido do Google Maps (iframe) */
+        .mapa {
+            border-radius: var(--arredondado);
+            overflow: hidden;
+            border: 1px solid var(--borda);
+            box-shadow: var(--sombra);
+        }
+
+        .mapa iframe {
+            width: 100%;
+            height: 240px;
+            border: none;
+            display: block;
+        }
+
+        /* =====================================================================
+           16) NEWSLETTER (assine para receber ofertas)
+           ===================================================================== */
+        .newsletter {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul) 100%);
+            color: var(--branco);
+            border-radius: var(--arredondado);
+            padding: 45px 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .newsletter h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 26px;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Formulário da newsletter (input + botão lado a lado) */
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 520px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background-color: var(--verde);
+            color: var(--branco);
+            border: none;
+            border-radius: 30px;
+            padding: 14px 30px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.25s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--verde-escuro);
+        }
+
+        /* =====================================================================
+           17) RODAPÉ (FOOTER)
            ===================================================================== */
         footer {
             background-color: var(--azul-escuro);
             color: rgba(255, 255, 255, 0.85);
             padding: 60px 0 0 0;
+            margin-top: 70px;
         }
 
-        /* Grade com as 3 colunas de informações do rodapé */
         .rodape-grade {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Vira 1 coluna no celular automaticamente */
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 36px;
             padding-bottom: 45px;
         }
@@ -554,7 +1515,6 @@
             padding-bottom: 10px;
         }
 
-        /* Linha verde decorativa embaixo do título da coluna */
         .rodape-coluna h4::after {
             content: "";
             position: absolute;
@@ -573,18 +1533,13 @@
             line-height: 1.7;
         }
 
-        .rodape-coluna ul {
-            list-style: none;
-        }
-
-        /* Links do rodapé (inclusive redes sociais) */
         .rodape-coluna a {
             transition: color 0.2s, padding-left 0.2s;
         }
 
         .rodape-coluna a:hover {
             color: var(--verde);
-            padding-left: 5px; /* Pequeno deslocamento para dar sensação de movimento */
+            padding-left: 5px;
         }
 
         /* Caixinha de horário de funcionamento */
@@ -596,7 +1551,32 @@
             margin-top: 10px;
         }
 
-        /* Linha final do rodapé com os direitos autorais */
+        /* Redes sociais em formato de botõezinhos */
+        .redes-sociais {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .redes-sociais a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            transition: all 0.25s;
+        }
+
+        .redes-sociais a:hover {
+            background-color: var(--verde);
+            padding-left: 0;
+            transform: translateY(-3px);
+        }
+
+        /* Linha final do rodapé */
         .direitos {
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             text-align: center;
@@ -606,14 +1586,98 @@
         }
 
         /* =====================================================================
-           9) RESPONSIVIDADE (AJUSTES PARA CELULAR)
-           Tudo dentro de @media só vale quando a tela for MENOR que 768px (tablets e celulares).
+           18) BOTÕES FLUTUANTES (WhatsApp e voltar ao topo)
+           ===================================================================== */
+        .flutuantes {
+            position: fixed;      /* Fica fixo na tela mesmo rolando */
+            bottom: 22px;
+            right: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .flutuante {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            font-size: 1.5rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            border: none;
+            transition: transform 0.25s;
+        }
+
+        .flutuante:hover {
+            transform: scale(1.1);
+        }
+
+        /* Botão do WhatsApp (verde) */
+        .flutuante.whatsapp {
+            background-color: #25d366;
+        }
+
+        /* Botão "voltar ao topo" (azul) */
+        .flutuante.topo {
+            background-color: var(--azul);
+            font-size: 1.3rem;
+        }
+
+        /* =====================================================================
+           19) RESPONSIVIDADE (AJUSTES PARA CELULAR)
+           Tudo dentro de @media só vale quando a tela for MENOR que 768px.
            ===================================================================== */
         @media (max-width: 768px) {
 
-            /* No celular, o banner fica com menos espaço e o título menor */
+            /* ---- TOP BAR (esconde alguns itens no celular) ---- */
+            .top-bar-conteudo {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .top-bar-esquerda span:not(:first-child),
+            .top-bar-direita {
+                display: none;   /* Some no celular para não poluir */
+            }
+
+            /* ---- CABEÇALHO ---- */
+            .topo {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.15rem;
+            }
+
+            /* Em telas pequenas, o texto "Carrinho" some (fica só o ícone) */
+            .carrinho span:not(.contador) {
+                display: none;
+            }
+
+            .carrinho {
+                padding: 10px 14px;
+            }
+
+            .busca {
+                max-width: 100%;
+                order: 3;   /* Faz a busca ir para a última posição (embaixo de tudo) */
+            }
+
+            /* ---- MENU ---- */
+            .menu a {
+                padding: 11px 13px;
+                font-size: 0.85rem;
+            }
+
+            /* ---- BANNER ---- */
             .banner {
-                padding: 60px 18px;
+                padding: 65px 18px;
             }
 
             .banner h1 {
@@ -624,22 +1688,30 @@
                 font-size: 1rem;
             }
 
-            /* No celular, o logo, a busca e o carrinho ficam centralizados um embaixo do outro */
-            .topo {
-                justify-content: center;
-                text-align: center;
+            .banner-estatisticas {
+                gap: 30px;
             }
 
-            .logo {
-                font-size: 1.15rem;
+            .banner-estatisticas .numero {
+                font-size: 1.5rem;
             }
 
-            .busca {
-                max-width: 100%; /* A busca ocupa a largura toda */
-                order: 3;        /* "order:3" faz a busca ir para a última posição (embaixo de tudo) */
+            /* ---- FAIXA DE VANTAGENS ---- */
+            .faixa-vantagens-grade {
+                transform: translateY(-25px);
             }
 
-            /* Reduz o espaço das seções para o site não ficar "comprido demais" no celular */
+            .vantagem-item {
+                border-right: none;
+                border-bottom: 1px solid var(--borda);
+                padding: 20px 22px;
+            }
+
+            .vantagem-item:last-child {
+                border-bottom: none;
+            }
+
+            /* ---- SEÇÕES ---- */
             section {
                 padding: 50px 0;
             }
@@ -648,69 +1720,151 @@
                 font-size: 1.6rem;
             }
 
+            /* ---- PROMOÇÃO ESPECIAL ---- */
+            .promo-especial {
+                padding: 34px 24px;
+                text-align: center;
+            }
+
+            .promo-especial-texto h2 {
+                font-size: 1.5rem;
+            }
+
+            /* ---- SOBRE NÓS ---- */
+            .sobre-conteudo {
+                gap: 30px;
+            }
+
             .sobre-texto h2 {
                 font-size: 1.5rem;
             }
 
-            /* No celular, a imagem do "Sobre Nós" fica acima do texto, sem o espaço grande */
-            .sobre-conteudo {
-                gap: 30px;
+            /* ---- DEPOIMENTOS ---- */
+            .grade-depoimentos {
+                grid-template-columns: 1fr;
+            }
+
+            /* ---- FORMULÁRIO ---- */
+            .formulario {
+                padding: 24px;
+            }
+
+            /* ---- NEWSLETTER ---- */
+            .newsletter {
+                padding: 34px 22px;
+            }
+
+            .newsletter h3 {
+                font-size: 1.3rem;
+            }
+
+            /* ---- BOTÕES FLUTUANTES ---- */
+            .flutuante {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Ajustes extras para telas MUITO pequenas (até 400px) */
+        @media (max-width: 400px) {
+            .banner h1 {
+                font-size: 1.5rem;
+            }
+
+            .botao,
+            .botao-secundario {
+                padding: 13px 26px;
+                font-size: 0.92rem;
+            }
+
+            .banner-estatisticas {
+                gap: 22px;
             }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- =====================================================================
+         BARRA SUPERIOR (TOP BAR)
+         Faixa fina com informações rápidas: telefone, frete grátis e horário.
+         ===================================================================== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-conteudo">
+
+                <div class="top-bar-esquerda">
+                    <span>📞 <strong>(11) 3456-7890</strong></span>
+                    <span>🚚 <span class="destaque">Entrega grátis</span> acima de R$ 79</span>
+                </div>
+
+                <div class="top-bar-direita">
+                    <span>⏰ Aberto agora até 22h</span>
+                    <span>💳 Parcelamos em até 3x sem juros</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- =====================================================================
          CABEÇALHO DO SITE
          A tag <header> define o cabeçalho, onde ficam o logo, a busca, o carrinho e o menu.
          ===================================================================== -->
     <header>
         <div class="container">
-            <!-- A classe "topo" organiza logo + busca + carrinho lado a lado -->
             <div class="topo">
 
-                <!-- A tag <a> é um LINK. Aqui ela leva o cliente de volta ao topo (Início). -->
+                <!-- A tag <a> é um LINK. Aqui ela leva o cliente de volta ao topo. -->
                 <a href="#inicio" class="logo" aria-label="Farmácia Vida e Saúde - Página inicial">
-                    <!-- Este quadradinho é o símbolo da farmácia (a cruz) -->
                     <span class="logo-icone">+</span>
-                    <!-- A tag <span> serve para marcar um pedacinho do texto e estilizar só ele -->
                     <span>Farmácia <span class="destaque">Vida &amp; Saúde</span></span>
                 </a>
 
-                <!-- Área de busca. A tag <form> agrupa campos que o cliente preenche. -->
+                <!-- Área de busca. A tag <form> agrupa os campos que o cliente preenche. -->
                 <form class="busca" onsubmit="event.preventDefault(); alert('Busca demonstrativa! Em breve integrada ao sistema da farmácia.');">
-                    <!-- <input> é o campo onde o cliente digita. O "placeholder" é o texto de exemplo dentro dele. -->
                     <input type="search" placeholder="O que você procura? Ex: dipirona, fralda..." aria-label="Buscar produtos">
-                    <!-- <button> é o botão clicável -->
                     <button type="submit">Buscar</button>
                 </form>
 
-                <!-- Carrinho de compras. A tag <button> indica que é clicável. -->
-                <button class="carrinho" aria-label="Abrir carrinho de compras">
-                    <!-- O <svg> desenha o ícone do carrinho sem precisar baixar imagem nenhuma -->
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <span>Carrinho</span>
-                    <!-- Este é o contador de itens no carrinho -->
-                    <span class="contador">0</span>
-                </button>
+                <!-- Ações do cliente: favoritos + carrinho -->
+                <div class="acoes-cliente">
 
+                    <!-- Botão de favoritos (coração) -->
+                    <button class="botao-icone" aria-label="Meus favoritos">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="badge">2</span>
+                    </button>
+
+                    <!-- Botão do carrinho de compras -->
+                    <button class="carrinho" aria-label="Abrir carrinho de compras">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span>Carrinho</span>
+                        <span class="contador" id="carrinho-contador">0</span>
+                    </button>
+
+                </div>
             </div>
         </div>
 
         <!-- A tag <nav> indica uma área de NAVEGAÇÃO (o menu do site). -->
         <nav>
             <div class="container">
-                <!-- <ul> cria uma LISTA e <li> cria cada ITEM da lista -->
                 <ul class="menu">
                     <li><a href="#inicio">Início</a></li>
+                    <li><a href="#categorias">Categorias</a></li>
                     <li><a href="#medicamentos">Medicamentos</a></li>
                     <li><a href="#higiene">Higiene &amp; Beleza</a></li>
-                    <li><a href="#ofertas">Ofertas</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#ofertas" class="promo">Ofertas</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </div>
@@ -724,103 +1878,440 @@
     <main>
 
         <!-- ---------- BANNER PRINCIPAL ---------- -->
-        <!-- O "id" serve de "apelido" para os links do menu encontrarem esta seção -->
         <section class="banner" id="inicio">
             <div class="container">
+
+                <!-- Selo pequeno no topo do banner -->
+                <span class="banner-selo">⭐ Nota 4.9 no Google — 2.300+ avaliações</span>
+
                 <h1>Cuidar da sua saúde é a nossa especialidade</h1>
                 <p>Medicamentos, higiene, beleza e bem-estar com atendimento rápido, preço justo e farmacêutico de plantão todos os dias.</p>
-                <!-- O link abaixo leva o cliente direto para a seção de ofertas -->
-                <a href="#ofertas" class="botao">Ver Ofertas</a>
+
+                <!-- Botões principais -->
+                <div class="banner-botoes">
+                    <a href="#ofertas" class="botao">Ver Ofertas 🎁</a>
+                    <a href="#contato" class="botao-secundario">Fale Conosco</a>
+                </div>
+
+                <!-- Estatísticas do banner -->
+                <div class="banner-estatisticas">
+                    <div class="item">
+                        <span class="numero">20+</span>
+                        <span class="rotulo">Anos de tradição</span>
+                    </div>
+                    <div class="item">
+                        <span class="numero">15 mil</span>
+                        <span class="rotulo">Clientes atendidos</span>
+                    </div>
+                    <div class="item">
+                        <span class="numero">2h</span>
+                        <span class="rotulo">Entrega expressa</span>
+                    </div>
+                    <div class="item">
+                        <span class="numero">24h</span>
+                        <span class="rotulo">Plantão de emergência</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- FAIXA DE VANTAGENS (diferenciais) ---------- -->
+        <section class="faixa-vantagens" style="padding: 0;">
+            <div class="container">
+                <div class="faixa-vantagens-grade">
+
+                    <div class="vantagem-item">
+                        <div class="vantagem-icone">🚚</div>
+                        <div class="vantagem-texto">
+                            <h4>Entrega rápida</h4>
+                            <p>Em até 2h no seu bairro</p>
+                        </div>
+                    </div>
+
+                    <div class="vantagem-item">
+                        <div class="vantagem-icone">💊</div>
+                        <div class="vantagem-texto">
+                            <h4>Farmácia de manipulação</h4>
+                            <p>Fórmulas personalizadas</p>
+                        </div>
+                    </div>
+
+                    <div class="vantagem-item">
+                        <div class="vantagem-icone">👨‍⚕️</div>
+                        <div class="vantagem-texto">
+                            <h4>Farmacêutico 24h</h4>
+                            <p>Plantão todos os dias</p>
+                        </div>
+                    </div>
+
+                    <div class="vantagem-item">
+                        <div class="vantagem-icone">💳</div>
+                        <div class="vantagem-texto">
+                            <h4>Parcele suas compras</h4>
+                            <p>Em até 3x sem juros</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- CATEGORIAS ---------- -->
+        <section class="categorias" id="categorias">
+            <div class="container">
+                <div class="titulo-secao">
+                    <h2>Navegue por Categorias</h2>
+                    <p>Encontre rapidamente o que você precisa</p>
+                </div>
+
+                <div class="grade-categorias">
+
+                    <div class="categoria-card">
+                        <div class="categoria-icone">💊</div>
+                        <h4>Medicamentos</h4>
+                        <span>320+ produtos</span>
+                    </div>
+
+                    <div class="categoria-card">
+                        <div class="categoria-icone">🧴</div>
+                        <h4>Higiene &amp; Beleza</h4>
+                        <span>180+ produtos</span>
+                    </div>
+
+                    <div class="categoria-card">
+                        <div class="categoria-icone">🍊</div>
+                        <h4>Vitaminas</h4>
+                        <span>95+ produtos</span>
+                    </div>
+
+                    <div class="categoria-card">
+                        <div class="categoria-icone">👶</div>
+                        <h4>Infantil</h4>
+                        <span>120+ produtos</span>
+                    </div>
+
+                    <div class="categoria-card">
+                        <div class="categoria-icone">🩹</div>
+                        <h4>Primeiros Socorros</h4>
+                        <span>75+ produtos</span>
+                    </div>
+
+                    <div class="categoria-card">
+                        <div class="categoria-icone">🌿</div>
+                        <h4>Fitoterápicos</h4>
+                        <span>60+ produtos</span>
+                    </div>
+
+                </div>
             </div>
         </section>
 
         <!-- ---------- PRODUTOS EM DESTAQUE ---------- -->
-        <section id="ofertas">
+        <section id="ofertas" style="padding-top: 20px;">
             <div class="container">
                 <div class="titulo-secao">
                     <h2>Produtos em Destaque</h2>
                     <p>As melhores ofertas da semana, selecionadas para você e sua família</p>
                 </div>
 
-                <!-- A classe "grade-produtos" organiza os cards em colunas automáticas -->
                 <div class="grade-produtos">
 
                     <!-- ===== CARD 1: DIPIRONA ===== -->
-                    <!-- A tag <article> representa um conteúdo independente, como um produto. -->
                     <article class="card" id="medicamentos">
-                        <span class="selo">-20%</span>
-                        <!-- A tag <img> mostra a imagem. O "alt" é o texto que aparece se a imagem não carregar e é lido por leitores de tela. -->
-                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
-                             alt="Cartela de comprimidos de dipirona sobre superfície clara">
+                        <div class="card-imagem">
+                            <span class="selo">-20%</span>
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+                                 alt="Cartela de comprimidos de dipirona sobre superfície clara">
+                        </div>
                         <div class="card-conteudo">
                             <span class="card-categoria">Medicamento</span>
                             <h3>Dipirona Sódica 500mg</h3>
                             <p class="descricao">Caixa com 20 comprimidos. Alívio da dor e da febre.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.9)</span>
+                            </div>
+
                             <div class="preco">
                                 <span class="preco-antigo">R$ 12,90</span>
                                 <span class="preco-atual">R$ 10,32</span>
                             </div>
-                            <button class="botao-comprar">Comprar</button>
+                            <span class="parcelamento">ou 3x de R$ 3,44 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="10.32" data-nome="Dipirona Sódica 500mg">
+                                🛒 Comprar
+                            </button>
                         </div>
                     </article>
 
                     <!-- ===== CARD 2: PROTETOR SOLAR ===== -->
                     <article class="card" id="higiene">
-                        <span class="selo">-15%</span>
-                        <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80"
-                             alt="Frasco de protetor solar ao lado de folhas verdes">
+                        <div class="card-imagem">
+                            <span class="selo">-15%</span>
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80"
+                                 alt="Frasco de protetor solar ao lado de folhas verdes">
+                        </div>
                         <div class="card-conteudo">
                             <span class="card-categoria">Higiene &amp; Beleza</span>
                             <h3>Protetor Solar FPS 50</h3>
                             <p class="descricao">Proteção UVA/UVB, toque seco, 120ml. Ideal para o dia a dia.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.8)</span>
+                            </div>
+
                             <div class="preco">
                                 <span class="preco-antigo">R$ 69,90</span>
                                 <span class="preco-atual">R$ 59,42</span>
                             </div>
-                            <button class="botao-comprar">Comprar</button>
+                            <span class="parcelamento">ou 3x de R$ 19,81 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="59.42" data-nome="Protetor Solar FPS 50">
+                                🛒 Comprar
+                            </button>
                         </div>
                     </article>
 
                     <!-- ===== CARD 3: VITAMINA C ===== -->
                     <article class="card">
-                        <span class="selo">-25%</span>
-                        <img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=600&q=80"
-                             alt="Laranjas frescas cortadas, fonte natural de vitamina C">
+                        <div class="card-imagem">
+                            <span class="selo novo">NOVO</span>
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?auto=format&fit=crop&w=600&q=80"
+                                 alt="Laranjas frescas cortadas, fonte natural de vitamina C">
+                        </div>
                         <div class="card-conteudo">
                             <span class="card-categoria">Vitaminas</span>
                             <h3>Vitamina C 1g Efervescente</h3>
                             <p class="descricao">Tubo com 10 comprimidos sabor laranja. Reforço para a imunidade.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.9)</span>
+                            </div>
+
                             <div class="preco">
                                 <span class="preco-antigo">R$ 32,00</span>
                                 <span class="preco-atual">R$ 24,00</span>
                             </div>
-                            <button class="botao-comprar">Comprar</button>
+                            <span class="parcelamento">ou 3x de R$ 8,00 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="24.00" data-nome="Vitamina C 1g Efervescente">
+                                🛒 Comprar
+                            </button>
                         </div>
                     </article>
 
                     <!-- ===== CARD 4: FRALDA INFANTIL ===== -->
                     <article class="card">
-                        <span class="selo">-10%</span>
-                        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80"
-                             alt="Bebê sorrindo usando fralda descartável">
+                        <div class="card-imagem">
+                            <span class="selo">-10%</span>
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80"
+                                 alt="Bebê sorrindo usando fralda descartável">
+                        </div>
                         <div class="card-conteudo">
                             <span class="card-categoria">Infantil</span>
                             <h3>Fralda Infantil Tam. M</h3>
                             <p class="descricao">Pacote com 40 unidades. Alta absorção e maciez para o bebê.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.7)</span>
+                            </div>
+
                             <div class="preco">
                                 <span class="preco-antigo">R$ 54,90</span>
                                 <span class="preco-atual">R$ 49,41</span>
                             </div>
-                            <button class="botao-comprar">Comprar</button>
+                            <span class="parcelamento">ou 3x de R$ 16,47 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="49.41" data-nome="Fralda Infantil Tam. M">
+                                🛒 Comprar
+                            </button>
                         </div>
                     </article>
+
+                    <!-- ===== CARD 5: ÁLCOOL EM GEL ===== -->
+                    <article class="card">
+                        <div class="card-imagem">
+                            <span class="selo">-30%</span>
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=600&q=80"
+                                 alt="Frasco de álcool em gel sobre superfície branca">
+                        </div>
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Higiene</span>
+                            <h3>Álcool em Gel 70%</h3>
+                            <p class="descricao">Frasco 500ml com pump. Higienização das mãos sem água.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.8)</span>
+                            </div>
+
+                            <div class="preco">
+                                <span class="preco-antigo">R$ 24,90</span>
+                                <span class="preco-atual">R$ 17,43</span>
+                            </div>
+                            <span class="parcelamento">ou 3x de R$ 5,81 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="17.43" data-nome="Álcool em Gel 70%">
+                                🛒 Comprar
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- ===== CARD 6: TERMÔMETRO DIGITAL ===== -->
+                    <article class="card">
+                        <div class="card-imagem">
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=600&q=80"
+                                 alt="Termômetro digital de testa sobre fundo claro">
+                        </div>
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Saúde</span>
+                            <h3>Termômetro Digital</h3>
+                            <p class="descricao">Medição rápida em 10 segundos. Visor em LCD com alarme.</p>
+
+                            <div class="avaliacao">
+                                ★★★★☆ <span>(4.5)</span>
+                            </div>
+
+                            <div class="preco">
+                                <span class="preco-atual">R$ 39,90</span>
+                            </div>
+                            <span class="parcelamento">ou 3x de R$ 13,30 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="39.90" data-nome="Termômetro Digital">
+                                🛒 Comprar
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- ===== CARD 7: SABONETE LÍQUIDO ===== -->
+                    <article class="card">
+                        <div class="card-imagem">
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80"
+                                 alt="Frasco de sabonete líquido para as mãos">
+                        </div>
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Higiene</span>
+                            <h3>Sabonete Líquido Neutro</h3>
+                            <p class="descricao">Frasco 250ml. Fórmula suave para peles sensíveis.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.9)</span>
+                            </div>
+
+                            <div class="preco">
+                                <span class="preco-atual">R$ 18,90</span>
+                            </div>
+                            <span class="parcelamento">ou 3x de R$ 6,30 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="18.90" data-nome="Sabonete Líquido Neutro">
+                                🛒 Comprar
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- ===== CARD 8: ÔMEGA 3 ===== -->
+                    <article class="card">
+                        <div class="card-imagem">
+                            <span class="selo novo">NOVO</span>
+                            <button class="favoritar" aria-label="Favoritar produto">♡</button>
+                            <img src="https://images.unsplash.com/photo-1550572017-edd951aa8f72?auto=format&fit=crop&w=600&q=80"
+                                 alt="Cápsulas de ômega 3 em frasco de vidro">
+                        </div>
+                        <div class="card-conteudo">
+                            <span class="card-categoria">Vitaminas</span>
+                            <h3>Ômega 3 - 1000mg</h3>
+                            <p class="descricao">Frasco com 60 cápsulas. Saúde do coração e do cérebro.</p>
+
+                            <div class="avaliacao">
+                                ★★★★★ <span>(4.8)</span>
+                            </div>
+
+                            <div class="preco">
+                                <span class="preco-antigo">R$ 89,90</span>
+                                <span class="preco-atual">R$ 74,90</span>
+                            </div>
+                            <span class="parcelamento">ou 3x de R$ 24,97 sem juros</span>
+
+                            <button class="botao-comprar" data-preco="74.90" data-nome="Ômega 3 - 1000mg">
+                                🛒 Comprar
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Botão para ver todos os produtos -->
+                <div class="ver-todos">
+                    <a href="#categorias">Ver todos os produtos →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ---------- PROMOÇÃO ESPECIAL ---------- -->
+        <section style="padding-top: 20px;">
+            <div class="container">
+                <div class="promo-especial">
+
+                    <div class="promo-especial-texto">
+                        <span class="tag">OFERTA EXCLUSIVA</span>
+                        <h2>Ganhe 20% OFF na sua primeira compra</h2>
+                        <p>Use o cupom abaixo no carrinho e aproveite descontos em todo o site. Válido para novos clientes.</p>
+                        <div class="cupom">VIDA20</div>
+                        <br>
+                        <a href="#ofertas" class="botao">Aproveitar agora</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- SERVIÇOS ---------- -->
+        <section class="servicos" id="servicos">
+            <div class="container">
+                <div class="titulo-secao">
+                    <h2>Nossos Serviços</h2>
+                    <p>Muito mais que uma farmácia: um cuidado completo para a sua saúde</p>
+                </div>
+
+                <div class="grade-servicos">
+
+                    <div class="servico-card">
+                        <div class="servico-icone">🚚</div>
+                        <h3>Entrega em Domicílio</h3>
+                        <p>Receba seus medicamentos em até 2 horas no conforto de casa. Entrega grátis acima de R$ 79.</p>
+                    </div>
+
+                    <div class="servico-card">
+                        <div class="servico-icone">💉</div>
+                        <h3>Aplicação de Injetáveis</h3>
+                        <p>Equipe de enfermagem qualificada para aplicar sua medicação com segurança, sem agendamento.</p>
+                    </div>
+
+                    <div class="servico-card">
+                        <div class="servico-icone">🩺</div>
+                        <h3>Aferição de Pressão</h3>
+                        <p>Meça sua pressão arterial gratuitamente em nossas lojas. Atendimento rápido e sem burocracia.</p>
+                    </div>
+
+                    <div class="servico-card">
+                        <div class="servico-icone">⚗️</div>
+                        <h3>Farmácia de Manipulação</h3>
+                        <p>Fórmulas personalizadas feitas sob medida para você, com qualidade e acompanhamento farmacêutico.</p>
+                    </div>
 
                 </div>
             </div>
         </section>
 
         <!-- ---------- SOBRE NÓS ---------- -->
-        <section class="sobre" id="sobre">
+        <section id="sobre">
             <div class="container">
                 <div class="sobre-conteudo">
 
@@ -828,6 +2319,12 @@
                     <div class="sobre-imagem">
                         <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
                              alt="Farmacêutica sorrindo enquanto atende um cliente na farmácia">
+
+                        <!-- Selo sobreposto -->
+                        <div class="sobre-selo">
+                            <span class="numero">20+</span>
+                            <span class="texto">ANOS DE<br>TRADIÇÃO</span>
+                        </div>
                     </div>
 
                     <!-- Coluna do texto -->
@@ -844,12 +2341,12 @@
                             família merece.
                         </p>
 
-                        <!-- <strong> deixa o texto em NEGRITO (dando importância à palavra) -->
                         <ul class="lista-vantagens">
                             <li>Entrega rápida em até 2 horas no bairro</li>
                             <li>Farmácia com manipulação própria</li>
                             <li>Programa de descontos para clientes fiéis</li>
                             <li>Aplicação de injetáveis sem agendamento</li>
+                            <li>Farmacêutico responsável disponível 24h</li>
                         </ul>
                     </div>
 
@@ -857,64 +2354,403 @@
             </div>
         </section>
 
+        <!-- ---------- DEPOIMENTOS ---------- -->
+        <section class="depoimentos">
+            <div class="container">
+                <div class="titulo-secao">
+                    <h2>O que nossos clientes dizem</h2>
+                    <p>Mais de 2.300 avaliações positivas no Google</p>
+                </div>
+
+                <div class="grade-depoimentos">
+
+                    <div class="depoimento-card">
+                        <div class="depoimento-estrelas">★★★★★</div>
+                        <p class="depoimento-texto">
+                            "Atendimento maravilhoso! Precisei de um remédio urgente e entregaram em menos de 1 hora. A equipe é super atenciosa."
+                        </p>
+                        <div class="depoimento-autor">
+                            <div class="depoimento-avatar">MC</div>
+                            <div>
+                                <strong>Mariana Costa</strong>
+                                <span>São Paulo/SP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="depoimento-card">
+                        <div class="depoimento-estrelas">★★★★★</div>
+                        <p class="depoimento-texto">
+                            "Sempre encontro tudo o que preciso aqui. Preços justos, boa variedade e o farmacêutico sempre tira minhas dúvidas com paciência."
+                        </p>
+                        <div class="depoimento-autor">
+                            <div class="depoimento-avatar">JA</div>
+                            <div>
+                                <strong>João Almeida</strong>
+                                <span>São Paulo/SP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="depoimento-card">
+                        <div class="depoimento-estrelas">★★★★★</div>
+                        <p class="depoimento-texto">
+                            "Confio totalmente! Minha família toda compra aqui há anos. O programa de fidelidade dá descontos ótimos."
+                        </p>
+                        <div class="depoimento-autor">
+                            <div class="depoimento-avatar">RS</div>
+                            <div>
+                                <strong>Renata Silva</strong>
+                                <span>São Paulo/SP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- PERGUNTAS FREQUENTES (FAQ) ---------- -->
+        <section>
+            <div class="container">
+                <div class="titulo-secao">
+                    <h2>Perguntas Frequentes</h2>
+                    <p>Tire suas dúvidas mais comuns sobre nossos serviços</p>
+                </div>
+
+                <div class="faq-lista">
+
+                    <!-- <details> é uma tag que cria um bloco que abre e fecha ao clicar -->
+                    <details class="faq-item" open>
+                        <summary>Vocês fazem entrega em domicílio?</summary>
+                        <p class="faq-resposta">
+                            Sim! Fazemos entregas em até 2 horas para toda a região central. A entrega é <strong>gratuita</strong> para compras acima de R$ 79. Para pedidos abaixo desse valor, cobramos uma taxa fixa de R$ 8.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Preciso de receita para comprar medicamentos?</summary>
+                        <p class="faq-resposta">
+                            Somente para medicamentos controlados (tarja preta ou vermelha). Medicamentos de venda livre (MIP) como dipirona, paracetamol e antialérgicos comuns podem ser comprados sem receita.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Vocês aceitam convênios ou planos de saúde?</summary>
+                        <p class="faq-resposta">
+                            Aceitamos os principais convênios e reembolsos. Consulte nossa equipe pelo WhatsApp ou telefone para verificar se o seu plano é aceito.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como funciona o programa de fidelidade?</summary>
+                        <p class="faq-resposta">
+                            A cada R$ 1 em compras você acumula 1 ponto. Ao atingir 500 pontos, você ganha R$ 30 em descontos. É automático e não precisa se cadastrar: basta informar seu CPF na hora da compra.
+                        </p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Vocês aplicam injetáveis?</summary>
+                        <p class="faq-resposta">
+                            Sim! Temos enfermeiros qualificados para aplicar injetáveis e vacinas. Não é necessário agendamento, basta trazer a receita ou o medicamento prescrito.
+                        </p>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- CONTATO ---------- -->
+        <section id="contato" style="padding-top: 20px;">
+            <div class="container">
+                <div class="titulo-secao">
+                    <h2>Entre em Contato</h2>
+                    <p>Estamos prontos para atender você. Escolha o canal que preferir!</p>
+                </div>
+
+                <div class="contato-area">
+
+                    <!-- Formulário de contato -->
+                    <form class="formulario" onsubmit="event.preventDefault(); alert('Mensagem enviada! Nossa equipe responderá em breve.'); this.reset();">
+                        <h3>Envie sua mensagem</h3>
+                        <p>Responderemos em até 24 horas úteis.</p>
+
+                        <div class="campo">
+                            <label for="nome">Seu nome completo</label>
+                            <input type="text" id="nome" name="nome" placeholder="Ex: Maria Silva" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="telefone">Telefone / WhatsApp</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                        </div>
+
+                        <div class="campo">
+                            <label for="assunto">Assunto</label>
+                            <select id="assunto" name="assunto">
+                                <option>Dúvida sobre produto</option>
+                                <option>Pedido / Entrega</option>
+                                <option>Reclamação</option>
+                                <option>Elogio</option>
+                                <option>Outro assunto</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="botao-enviar">Enviar Mensagem</button>
+                    </form>
+
+                    <!-- Informações + mapa -->
+                    <div class="info-contato">
+
+                        <div class="info-bloco">
+                            <div class="info-icone">📍</div>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>Rua das Acácias, 1234 — Centro<br>São Paulo/SP — CEP 01234-000</p>
+                            </div>
+                        </div>
+
+                        <div class="info-bloco">
+                            <div class="info-icone">📞</div>
+                            <div>
+                                <h4>Telefones</h4>
+                                <p>Fixo: (11) 3456-7890<br>WhatsApp: (11) 98765-4321</p>
+                            </div>
+                        </div>
+
+                        <div class="info-bloco">
+                            <div class="info-icone">⏰</div>
+                            <div>
+                                <h4>Horário de Funcionamento</h4>
+                                <p>Seg a Sex: 07h às 22h<br>Sáb: 08h às 20h<br>Dom e feriados: 09h às 18h</p>
+                            </div>
+                        </div>
+
+                        <!-- Mapa do Google Maps embutido -->
+                        <div class="mapa">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0976915724816!2d-46.65597218502199!3d-23.56319098468368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzQ3LjUiUyA0NsKwMzknMTMuNSJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    title="Mapa da localização da Farmácia Vida & Saúde"></iframe>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Newsletter (dentro da seção de contato, abaixo) -->
+                <div class="newsletter">
+                    <h3>📩 Receba ofertas exclusivas</h3>
+                    <p>Cadastre-se e ganhe <strong>10% de desconto</strong> na próxima compra. Sem spam, prometido!</p>
+
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Cadastro realizado! Verifique seu e-mail.'); this.reset();">
+                        <input type="email" placeholder="Digite seu melhor e-mail" required>
+                        <button type="submit">Quero desconto</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <!-- =====================================================================
          RODAPÉ
-         A tag <footer> guarda as informações finais do site: contato, endereço,
-         horário de funcionamento, redes sociais e direitos autorais.
+         A tag <footer> guarda as informações finais do site.
          ===================================================================== -->
-    <footer id="contato">
+    <footer>
         <div class="container">
             <div class="rodape-grade">
 
-                <!-- Coluna 1: contato e endereço -->
+                <!-- Coluna 1: sobre a farmácia -->
                 <div class="rodape-coluna">
                     <h4>Farmácia Vida &amp; Saúde</h4>
-                    <!-- A tag <address> é usada para informações de contato. -->
-                    <address style="font-style: normal;">
-                        <p>📍 Rua das Acácias, 1234 — Centro<br>São Paulo/SP — CEP 01234-000</p>
-                        <p>📞 (11) 3456-7890</p>
-                        <p>📱 WhatsApp: (11) 98765-4321</p>
-                        <p>✉️ contato@vidaesaude.com.br</p>
-                    </address>
+                    <p>Há mais de 20 anos cuidando da saúde da sua família com atendimento humanizado, preço justo e entrega rápida.</p>
+
+                    <!-- Ícones das redes sociais -->
+                    <div class="redes-sociais">
+                        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/5511987654321" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Coluna 2: horário de funcionamento -->
+                <!-- Coluna 2: contato -->
                 <div class="rodape-coluna">
-                    <h4>Horário de Funcionamento</h4>
+                    <h4>Contato</h4>
+                    <p>📍 Rua das Acácias, 1234 — Centro<br>São Paulo/SP — CEP 01234-000</p>
+                    <p>📞 (11) 3456-7890</p>
+                    <p>📱 WhatsApp: (11) 98765-4321</p>
+                    <p>✉️ contato@vidaesaude.com.br</p>
+                </div>
+
+                <!-- Coluna 3: horário -->
+                <div class="rodape-coluna">
+                    <h4>Horário</h4>
                     <div class="horario">
-                        <p>Segunda a Sexta: 07h às 22h</p>
+                        <p>Seg a Sex: 07h às 22h</p>
                         <p>Sábado: 08h às 20h</p>
-                        <p>Domingo e feriados: 09h às 18h</p>
+                        <p>Dom e feriados: 09h às 18h</p>
                         <p><strong>Plantão 24h para emergências</strong></p>
                     </div>
                 </div>
 
-                <!-- Coluna 3: links úteis e redes sociais -->
+                <!-- Coluna 4: links úteis -->
                 <div class="rodape-coluna">
-                    <h4>Links &amp; Redes Sociais</h4>
+                    <h4>Links Úteis</h4>
                     <ul>
                         <li><a href="#inicio">Início</a></li>
-                        <li><a href="#medicamentos">Medicamentos</a></li>
-                        <li><a href="#higiene">Higiene &amp; Beleza</a></li>
+                        <li><a href="#categorias">Categorias</a></li>
                         <li><a href="#ofertas">Ofertas da Semana</a></li>
-                        <!-- O atributo target="_blank" abre o link em uma nova aba -->
-                        <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
-                        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://wa.me/5511987654321" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="#servicos">Nossos Serviços</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#contato">Fale Conosco</a></li>
                     </ul>
                 </div>
 
             </div>
         </div>
 
-        <!-- Linha final com os direitos autorais. O símbolo &copy; vira © -->
         <div class="direitos">
-            <p>&copy; 2026 Farmácia Vida &amp; Saúde — Todos os direitos reservados. | CNPJ 00.000.000/0001-00</p>
-            <p>Este site é demonstrativo. Preços e produtos sujeitos a alteração sem aviso prévio.</p>
+            <p>&copy; 2025 Farmácia Vida &amp; Saúde — Todos os direitos reservados. | CNPJ 00.000.000/0001-00</p>
+            <p style="margin-top: 6px;">Este site é demonstrativo. Preços e produtos sujeitos a alteração sem aviso prévio.</p>
         </div>
     </footer>
+
+    <!-- =====================================================================
+         BOTÕES FLUTUANTES (WhatsApp + Voltar ao Topo)
+         Ficam fixos no canto inferior direito da tela.
+         ===================================================================== -->
+    <div class="flutuantes">
+
+        <!-- Botão do WhatsApp -->
+        <a href="https://wa.me/5511987654321" target="_blank" rel="noopener" class="flutuante whatsapp" aria-label="Fale conosco pelo WhatsApp">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+        </a>
+
+        <!-- Botão "voltar ao topo" -->
+        <button class="flutuante topo" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="Voltar ao topo">
+            ↑
+        </button>
+
+    </div>
+
+    <!-- =====================================================================
+         JAVASCRIPT (pequenos "comportamentos" do site)
+         Este trecho faz o carrinho somar, o coração ficar vermelho, etc.
+         ===================================================================== -->
+    <script>
+        /* ---------------------------------------------------------------------
+           1) CARRINHO DE COMPRAS
+           Quando alguém clica em "Comprar", somamos 1 no contador do carrinho.
+           --------------------------------------------------------------------- */
+
+        // "querySelector" procura o PRIMEIRO elemento que combine com o seletor.
+        var contador = document.getElementById("carrinho-contador");
+        var total = 0;  // Começa em zero
+
+        // "querySelectorAll" pega TODOS os botões com a classe .botao-comprar.
+        var botoesComprar = document.querySelectorAll(".botao-comprar");
+
+        // Para cada botão, adicionamos um "escutador de cliques".
+        botoesComprar.forEach(function (botao) {
+            botao.addEventListener("click", function () {
+                total = total + 1;          // Soma 1 no total
+                contador.textContent = total; // Atualiza o número mostrado no carrinho
+
+                // Pega o nome do produto (guardado no atributo data-nome do botão)
+                var nomeProduto = botao.getAttribute("data-nome");
+
+                // Mostra uma mensagem rápida para o cliente
+                alert("✅ " + nomeProduto + " adicionado ao carrinho!");
+
+                // Efeito visual: o contador "pula" por um instante
+                contador.style.transform = "scale(1.4)";
+                setTimeout(function () {
+                    contador.style.transform = "scale(1)";
+                }, 200);
+            });
+        });
+
+        /* ---------------------------------------------------------------------
+           2) BOTÃO DE FAVORITOS (coração)
+           Ao clicar, o coração fica vermelho e preenchido. Ao clicar de novo, volta.
+           --------------------------------------------------------------------- */
+        var botoesFavoritar = document.querySelectorAll(".favoritar");
+
+        botoesFavoritar.forEach(function (botao) {
+            botao.addEventListener("click", function () {
+                // Se o coração já está marcado (♥), desmarca (♡) e vice-versa
+                if (botao.textContent.trim() === "♡") {
+                    botao.textContent = "♥";
+                    botao.style.color = "#e74c3c"; // Vermelho
+                } else {
+                    botao.textContent = "♡";
+                    botao.style.color = "#7b8794"; // Cinza
+                }
+            });
+        });
+
+        /* ---------------------------------------------------------------------
+           3) MENU ATIVO (destaca o link da seção que está visível)
+           Conforme o cliente rola a página, o link correspondente fica destacado.
+           --------------------------------------------------------------------- */
+        var secoes = document.querySelectorAll("section[id]");
+        var linksMenu = document.querySelectorAll(".menu a");
+
+        // "scroll" é disparado toda vez que o cliente rola a página.
+        window.addEventListener("scroll", function () {
+            var posicaoAtual = window.scrollY + 150; // +150 para compensar o cabeçalho fixo
+            var secaoAtual = "";
+
+            // Descobrimos em qual seção o cliente está
+            secoes.forEach(function (secao) {
+                if (posicaoAtual >= secao.offsetTop) {
+                    secaoAtual = secao.getAttribute("id");
+                }
+            });
+
+            // Removemos o destaque de todos os links
+            linksMenu.forEach(function (link) {
+                link.style.backgroundColor = "";
+                link.style.borderBottomColor = "";
+            });
+
+            // Adicionamos destaque apenas no link da seção atual
+            linksMenu.forEach(function (link) {
+                if (link.getAttribute("href") === "#" + secaoAtual) {
+                    link.style.backgroundColor = "rgba(255, 255, 255, 0.08)";
+                    link.style.borderBottomColor = "#2fb380";
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
